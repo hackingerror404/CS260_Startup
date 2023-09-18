@@ -7,6 +7,7 @@ I can use **anything** I write in here on the midterm and the final.
 ## Important Info
 
 My IP Address: 54.145.191.41
+
 How to SSH in: `ssh -i [key pair file] ubuntu@[ip address]`
 
 ## Startup GitHub Setup
