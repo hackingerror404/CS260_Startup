@@ -17,3 +17,8 @@ Important Git Commands:
 * to solve a merging crisis, edit the necessary file manually until it's happy.
 
 A GitHub fork provides the ability to create a copy of a GitHub repository. Fork a repo on GitHub, then pull / clone it onto your machine.
+
+## Server information
+
+`dig [domain name]` returns the IP Address of the server you're connected to.  
+The Caddy file routes HTTPS requests for your domain.  
