@@ -34,4 +34,6 @@ These tags require more text:
 - a(link): `<a href="_"> [clicky link text here] </a>`
 - comments: `<!--_______-->`
 
-There is a distinction between structure elements that are block vs inline. A block element is meant to be a distinct block in the flow of the content structure. An inline element is meant to be inline with the content flow of a block element. In other words, inline elements do not disrupt the flow of a block element's content. *Examples of inline elements: bold text, span elements.*
+There is a distinction between structure elements that are block vs inline. A block element is meant to be a distinct block in the flow of the content structure. An inline element is meant to be inline with the content flow of a block element. In other words, inline elements do not disrupt the flow of a block element's content. *Examples of inline elements: bold text, span elements.*  
+
+Deploy simon to production: `./deployFiles.sh -k <yourpemkey> -h <yourdomain> -s simon`  
