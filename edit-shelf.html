@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <!-- Tell browsers not to scale the viewport automatically -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>The Movie Shelf</title>
+        <link rel="icon" href="favicon.ico" />
+    </head>
+    <body>
+        <header>
+            <h1>The Movie Shelf</h1>
+
+            <!-- Navigation elements -->
+            <nav>
+                <!-- Menu is a semantic alternative to <ul> that represents an interaction -->
+                <menu>
+                <li><a href="index.html">Login</a></li>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="shelf.html">Your Shelf</a></li>
+                <li><a href="edit-shelf.html">Edit Shelf</a></li>
+                </menu>
+            </nav>
+
+            <!-- Since we don't have the ability to style we use old style HTML to give some visual formatting -->
+            <hr />
+        </header>
+
+        <main>
+            <h2>Edit Your Shelf</h2>
+            <form method="get" action="shelf.html">
+                <navigation>
+                    <div>
+                        <label for="movie_name">Movie Name:</label>
+                        <input type="text" id="movie_name" placeholder="MOVIE NAME" />
+                    </div>
+                    <br />
+                    <div>
+                        <button type="submit">Add</button>
+                        <button type="submit">Delete</button>
+                    </div>
+                </navigation>
+            </form>
+            <br />
+
+            <h3>Movie Characteristics</h3>
+            <table>
+                <tr>
+                    <td>Format</td>
+                    <td>Physical Format</td>
+                    <td>Digital Location</td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" id="physical" name="physical" value="Physical">
+                        <label for="movie_format">Physical</label>
+                    </td>
+                    <td>
+                        <input type="checkbox" id="dvd" name="dvd" value="DVD">
+                        <label for="movie_physical_format">DVD</label>
+                        <input type="checkbox" id="bluray" name="bluray" value="Bluray">
+                        <label for="movie_physical_format">Blu-Ray</label>
+                    </td>
+                    <td>
+                        <input type="checkbox" id="moviesAnywhere" name="moviesAnywhere" value="MoviesAnywhere">
+                        <label for="movie_digital_location">Movies Anywhere</label>
+                        <input type="checkbox" id="vudu" name="vudu" value="Vudu">
+                        <label for="movie_digital_location">Vudu</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" id="digital" name="digital" value="Digital">
+                        <label for="movie_format">Digital</label>
+                    </td>
+                    <td>
+                        <input type="checkbox" id="4k_bluray" name="4k_bluray" value="4K_Bluray">
+                        <label for="movie_physical_format">4K Blu-Ray</label>
+                    </td>
+                    <td>
+                        <input type="checkbox" id="primeVideo" name="primeVideo" value="PrimeVideo">
+                        <label for="movie_digital_location">Prime Video</label>
+                        <input type="checkbox" id="itunes" name="itunes" value="iTunes">
+                        <label for="movie_digital_location">iTunes</label>
+                    </td>
+                </tr>
+            </table>
+        </main>
+
+        <footer>
+            <hr />
+            <span class="text-reset">Jayden Hacking</span>
+            <br />
+            <a href="https://github.com/hackingerror404/CS260_Startup">GitHub</a>
+        </footer>
+    </body>
+</html>
