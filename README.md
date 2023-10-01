@@ -35,3 +35,13 @@ I am going to use the required technologies in the following ways:
 - **Login** - Register and login users. Credentials securely stored in database. Can't view the home page or users' shelves unless authenticated.
 - **WebSocket** - As each user adds or removes items from their shelves, a notification about this update is broadcasted to all users on the home page.
 - **React** - Application ported to use the React web framework.
+
+### HTML Deliverable
+For this deliverable I built out the structure of my application using HTML.
+- **HTML pages** - Four HTML pages that represent the ability to log in, view other users' activity, view a "shelf," and edit entries on your shelf.
+- **Links** - The login page links automatically to the home page. The home page, shelf, and edit shelf pages all contain links all pages on the site.
+- **Text** - Other users' activity, shelf content, and search results are represented by text.
+- **Images** - A simple image of a movie shelf is placed on the login screen.
+- **Login** - Input box for username and password, and a submit button for "log in" and "sign up."
+- **Database** - The search results on edit-shelf.html represent generated search data from The Movie Database (TMDB).
+- **WebSocket** - Other users' activity on the home page represents realtime additions and removals from other users' shelves.
