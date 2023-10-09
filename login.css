@@ -1,0 +1,106 @@
+body {
+  display: flex;
+  flex-direction: column;
+  min-width: 375px;
+  font-family: sans-serif;
+  background-color: #363636;
+  color: white;
+  height: 100%;
+}
+
+header {
+    padding: 0.5em;
+    font-size: 25px;
+    text-align: center;
+}
+
+header h3 {
+    font-style:italic;
+    animation-name: tagline;
+    animation-duration: 2s;
+}
+
+main {
+    padding: 0.5em;
+    font-size: 20px;
+    text-align: center;
+}
+
+#bootstrap-overrides div div {
+    display: flex;
+    background-color: #363636;
+    color: white;
+    border: none;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+#bootstrap-overrides div div form div {
+    padding: 0.25em;
+}
+
+#username {
+    flex: 1 10px;
+}
+
+#username-label {
+    flex: 1 10px;
+}
+
+#password {
+    flex: 1 10px;
+}
+
+#password-label {
+    flex: 1 10px;
+}
+
+#login-button {
+    width: 45%;
+}
+
+#signup-button {
+    width: 45%;
+}
+
+img {
+    max-width: 50%;
+    height: auto;
+    border-radius: 2%;
+}
+
+footer {
+    padding: 0.25em;
+    margin: 0.5em;
+    /*background-color: black;*/
+    text-align: right;
+    border: solid thin white;
+    font-style: italic;
+}
+
+@media (max-height: 700px) {
+    img {
+        display: none;
+    }
+    footer {
+        display: none;
+    }
+}
+
+@media (orientation: portrait) {
+    footer {
+        position: absolute;
+        bottom: 0;
+        width: 95%;
+    }
+}
+
+@keyframes tagline {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
