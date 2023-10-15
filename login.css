@@ -1,7 +1,7 @@
 body {
   display: flex;
   flex-direction: column;
-  min-width: 375px;
+  min-width: 250px;
   font-family: sans-serif;
   background-color: #363636;
   color: white;
@@ -10,8 +10,14 @@ body {
 
 header {
     padding: 0.5em;
-    font-size: 25px;
+    font-size: 5vw;
     text-align: center;
+    /*background-color: black;*/
+    border: solid white thin;
+
+    background-color: #000000;
+    opacity: 1;
+    background: linear-gradient(135deg, #000dff55 25%, transparent 25%) -24px 0/ 48px 48px, linear-gradient(225deg, #000dff 25%, transparent 25%) -24px 0/ 48px 48px, linear-gradient(315deg, #000dff55 25%, transparent 25%) 0px 0/ 48px 48px, linear-gradient(45deg, #000dff 25%, #000000 25%) 0px 0/ 48px 48px;
 }
 
 header h3 {
@@ -75,8 +81,10 @@ footer {
     margin: 0.5em;
     /*background-color: black;*/
     text-align: right;
-    border: solid thin white;
+    border: dashed thin white;
     font-style: italic;
+
+    
 }
 
 @media (max-height: 700px) {
