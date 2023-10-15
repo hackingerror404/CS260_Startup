@@ -6,73 +6,140 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>The Movie Shelf</title>
         <link rel="icon" href="favicon.ico" />
+
+        <link rel="stylesheet" href="shelf.css" />
     </head>
     <body>
         <header>
-            <h1>The Movie Shelf</h1>
+            <div class="header-container">
+                <div class="p-container">
+                    <p>The Movie Shelf</p>
+                </div>
 
-            <!-- Navigation elements -->
-            <nav>
-                <!-- Menu is a semantic alternative to <ul> that represents an interaction -->
-                <menu>
-                <li><a href="index.html">Login</a></li>
-                <li><a href="home.html">Home</a></li>
-                <li><a href="shelf.html">Your Shelf</a></li>
-                <li><a href="edit-shelf.html">Edit Shelf</a></li>
-                </menu>
-            </nav>
-
-            <!-- Since we don't have the ability to style we use old style HTML to give some visual formatting -->
-            <hr />
+                <div class="links-container">
+                    <a href="index.html">Login</a>
+                    <a href="home.html">Home</a>
+                    <a href="shelf.html">Your Shelf</a>
+                    <a href="edit-shelf.html">Edit Shelf</a>
+                </div>
+            </div>
         </header>
 
         <main>
-            <h2>lemonlimebeats's shelf</h2>
-            <table>
-                <tr>
-                    <td>82</td>
-                    <td>81</td>
-                    <td>45</td>
-                </tr>
-                <tr>
-                    <td>Films</td>
-                    <td>Phys.</td>
-                    <td>Digital</td>
-                </tr>
-            </table>
-            <br />
+            <div class="main-top-layer">
+                <h2>lemonlimebeats's shelf</h2>
+                <table>
+                    <tr>
+                        <td>82</td>
+                        <td>81</td>
+                        <td>45</td>
+                    </tr>
+                    <tr>
+                        <td>Films</td>
+                        <td>Phys.</td>
+                        <td>Digital</td>
+                    </tr>
+                </table>
+                <br />
+                <br />
+            </div>
 
-            <table>
-                <tr>
-                    <td>Back to the Future</td>
-                    <td>P, D</td>
-                    <td>4K Blu-Ray, Blu-Ray, Movies Anywhere</td>
-                </tr>
-                <tr>
-                    <td>Casino Royale</td>
-                    <td>P</td>
-                    <td>DVD</td>
-                </tr>
-                <tr>
-                    <td>Dune</td>
-                    <td>D</td>
-                    <td>Prime Video</td>
-                </tr>
-                <tr>
-                    <td>Howl's Moving Castle</td>
-                    <td>P</td>
-                    <td>Blu-Ray, DVD</td>
-                </tr>
-                <tr>
-                    <td>The Lego Movie</td>
-                    <td>P, D</td>
-                    <td>Blu-Ray, Movies Anywhere</td>
-                </tr>
-            </table>
+            <div class="shelf-contents">
+                <table>
+                    <tr>
+                        <td id="movie-title">Back to the Future</td>
+                        <td>
+                            <div class="format-letter">
+                                <div class="format-letter-P">P</div>
+                                <div class="format-letter-D">D</div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="multiple-formats">
+                                <div class="physical-format">
+                                    4K Blu-Ray
+                                </div>
+                                <div class="physical-format">
+                                    Blu-Ray
+                                </div>
+                                <div class="digital-format">
+                                    Movies Anywhere
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="movie-title">Casino Royale</td>
+                        <td id="format-letter">
+                            <div class="format-letter">
+                                <div class="format-letter-P">P</div>
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                <div class="physical-format">
+                                    DVD
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="movie-title">Dune</td>
+                        <td id="format-letter">
+                            <div>
+                                <div class="format-letter-D">D</div>
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                <div class="digital-format">
+                                    Prime Video
+                                </div>
+                            </div> 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="movie-title">Howl's Moving Castle</td>
+                        <td id="format-letter">
+                            <div class="format-letter">
+                                <div class="format-letter-P">P</div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="multiple-formats">
+                                <div class="physical-format">
+                                    Blu-Ray
+                                </div>
+                                <div class="physical-format">
+                                    DVD
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="movie-title">The Lego Movie</td>
+                        <td>
+                            <div class="format-letter">
+                                <div class="format-letter-P">P</div>
+                                <div class="format-letter-D">D</div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="multiple-formats">
+                                <div class="physical-format">
+                                    Blu-Ray
+                                </div>
+                                <div class="digital-format">
+                                    Movies Anywhere
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </main>
 
         <footer>
-            <hr />
             <span class="text-reset">Jayden Hacking</span>
             <br />
             <a href="https://github.com/hackingerror404/CS260_Startup">GitHub</a>
