@@ -106,10 +106,6 @@ main .primary-edit-shelf-stuff .input-group label {
     margin-right: 20px;
 }
 
-main .primary-edit-shelf-stuff .input-group input {
-    border-radius: 25px 0 0 25px;
-}
-
 main .primary-edit-shelf-stuff .search-results {
     border: dashed white thin;
     border-radius: 10px;
@@ -180,7 +176,7 @@ main .checkbox-stuff table td {
 }
 
 #underline-mc {
-    color: lightblue;
+    color: #00FFFF;
 }
 
 footer {
