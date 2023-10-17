@@ -7,33 +7,39 @@
         <title>The Movie Shelf</title>
         <link rel="icon" href="favicon.ico" />
 
+         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" 
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+        crossorigin="anonymous" />
         <link rel="stylesheet" href="edit-shelf.css" />
     </head>
     <body>
-        <header>
-            <div class="header-container">
-                <div class="p-container">
-                    <p>The Movie Shelf</p>
-                </div>
-
-                <div class="links-container">
-                    <a href="index.html">Login</a>
-                    <a href="home.html">Home</a>
-                    <a href="shelf.html">Your Shelf</a>
-                    <a href="edit-shelf.html">Edit Shelf</a>
-                </div>
-            </div>
-        </header>
-
-        <main>
-            <h2>Edit Your Shelf</h2>
-            <form method="get" action="shelf.html">
-                <navigation>
-                    <div>
-                        <label for="movie_name">Movie Name:</label>
-                        <input type="text" id="movie_name" placeholder="MOVIE NAME" value="Bla"/>
+        <div class="body-wrapper">
+            <header>
+                <div class="header-container">
+                    <div class="p-container">
+                        <p>The Movie Shelf</p>
                     </div>
-                    <div>
+    
+                    <div class="links-container">
+                        <a href="index.html">Login</a>
+                        <a href="home.html">Home</a>
+                        <a href="shelf.html">Your Shelf</a>
+                        <a href="edit-shelf.html">Edit Shelf</a>
+                    </div>
+                </div>
+            </header>
+    
+            <main>
+                <div class="primary-edit-shelf-stuff">
+                    <h2>Edit Your Shelf</h2>
+                    <div class="">
+                        <div class="input-group">
+                            <label for="movie_name">Movie Name:</label>
+                            <input type="text" id="movie_name" class="form-control" placeholder="MOVIE NAME" value="Bla">
+                            <button class="btn btn-primary" type="button">Search</button>
+                        </div>
+                    </div>
+                    <div class="search-results">
                         <p>Search Results from TMDB.org:</p>
                         <ul>
                             <li>Blade</li>
@@ -42,63 +48,65 @@
                             <li>Blade of the Immortal</li>
                         </ul>
                     </div>
-                    <div>
-                        <button type="submit">Add</button>
-                        <button type="submit">Delete</button>
-                    </div>
-                </navigation>
-            </form>
-            <br />
+                    <form method="get" action="shelf.html">
+                        <div class="edit-shelf-buttons">
+                            <button type="submit" class="btn btn-outline-primary" id="add-button">Add</button>
+                            <button type="submit" class="btn btn-outline-primary" id="delete-button">Delete</button>
+                        </div>
+                    </form>
+                </div>
 
-            <h3>Movie Characteristics</h3>
-            <table>
-                <tr>
-                    <td>Format</td>
-                    <td>Physical Format</td>
-                    <td>Digital Location</td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="checkbox" id="physical" name="physical" value="Physical">
-                        <label for="movie_format">Physical</label>
-                    </td>
-                    <td>
-                        <input type="checkbox" id="dvd" name="dvd" value="DVD">
-                        <label for="movie_physical_format">DVD</label>
-                        <input type="checkbox" id="bluray" name="bluray" value="Bluray">
-                        <label for="movie_physical_format">Blu-Ray</label>
-                    </td>
-                    <td>
-                        <input type="checkbox" id="moviesAnywhere" name="moviesAnywhere" value="MoviesAnywhere">
-                        <label for="movie_digital_location">Movies Anywhere</label>
-                        <input type="checkbox" id="vudu" name="vudu" value="Vudu">
-                        <label for="movie_digital_location">Vudu</label>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="checkbox" id="digital" name="digital" value="Digital">
-                        <label for="movie_format">Digital</label>
-                    </td>
-                    <td>
-                        <input type="checkbox" id="4k_bluray" name="4k_bluray" value="4K_Bluray">
-                        <label for="movie_physical_format">4K Blu-Ray</label>
-                    </td>
-                    <td>
-                        <input type="checkbox" id="primeVideo" name="primeVideo" value="PrimeVideo">
-                        <label for="movie_digital_location">Prime Video</label>
-                        <input type="checkbox" id="itunes" name="itunes" value="iTunes">
-                        <label for="movie_digital_location">iTunes</label>
-                    </td>
-                </tr>
-            </table>
-        </main>
-
-        <footer>
-            <hr />
-            <span class="text-reset">Jayden Hacking</span>
-            <br />
-            <a href="https://github.com/hackingerror404/CS260_Startup">GitHub</a>
-        </footer>
+                <div class="checkbox-stuff">
+                    <h3>Movie Characteristics</h3>
+                    <table>
+                        <tr id="underline-mc">
+                            <td>Format</td>
+                            <td>Physical Format</td>
+                            <td>Digital Location</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="checkbox" id="physical" name="physical" value="Physical">
+                                <label for="movie_format">Physical</label>
+                            </td>
+                            <td>
+                                <input type="checkbox" id="dvd" name="dvd" value="DVD">
+                                <label for="movie_physical_format">DVD</label>
+                                <input type="checkbox" id="bluray" name="bluray" value="Bluray">
+                                <label for="movie_physical_format">Blu-Ray</label>
+                            </td>
+                            <td id="multiple-checks">
+                                <input type="checkbox" id="moviesAnywhere" name="moviesAnywhere" value="MoviesAnywhere">
+                                <label for="movie_digital_location">Movies Anywhere</label>
+                                <input type="checkbox" id="vudu" name="vudu" value="Vudu">
+                                <label for="movie_digital_location">Vudu</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="checkbox" id="digital" name="digital" value="Digital">
+                                <label for="movie_format">Digital</label>
+                            </td>
+                            <td>
+                                <input type="checkbox" id="4k_bluray" name="4k_bluray" value="4K_Bluray">
+                                <label for="movie_physical_format">4K Blu-Ray</label>
+                            </td>
+                            <td id="multiple-checks">
+                                <input type="checkbox" id="primeVideo" name="primeVideo" value="PrimeVideo">
+                                <label for="movie_digital_location">Prime Video</label>
+                                <input type="checkbox" id="itunes" name="itunes" value="iTunes">
+                                <label for="movie_digital_location">iTunes</label>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </main>
+    
+            <footer>
+                <span class="text-reset">Jayden Hacking</span>
+                <br />
+                <a href="https://github.com/hackingerror404/CS260_Startup">GitHub</a>
+            </footer>
+        </div>
     </body>
 </html>

@@ -1,0 +1,235 @@
+body .body-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-width: 302px;
+    font-family: sans-serif;
+    background-color: #363636 !important;
+    color: white;
+    min-height: 100vh;
+}
+
+header {
+    padding: 0.5em !important;
+}
+
+header .header-container {
+    padding: 15px;
+    font-size: 30px;
+    border: solid white thin;
+    background-color: #000000;
+    opacity: 1;
+    background: linear-gradient(135deg, #000dff55 25%, transparent 25%) -24px 0/ 48px 48px, linear-gradient(225deg, #000dff 25%, transparent 25%) -24px 0/ 48px 48px, linear-gradient(315deg, #000dff55 25%, transparent 25%) 0px 0/ 48px 48px, linear-gradient(45deg, #000dff 25%, #000000 25%) 0px 0/ 48px 48px;
+
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: space-between;
+}
+
+header .header-container .p-container {
+    text-align: left;
+    flex-grow: 1;
+    font-weight: bold;
+}
+
+header .header-container .p-container p {
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+header .header-container .links-container {
+    text-align: right;
+    align-items: right;
+    float: right;
+    font-size: 25px;
+}
+
+header .header-container .links-container a {
+    margin-right: 0.5em;
+    color: white;
+    text-decoration: none;
+}
+
+header .header-container .links-container a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 800px) {
+    .p-container {
+        display:none;
+    }
+}
+
+@media (max-width: 560px) {
+    .links-container {
+        font-size: clamp(15px, 5vw, 25px);
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        white-space: nowrap;
+        min-width: 250px;
+    }
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    justify-content: space-between;
+}
+
+main .primary-edit-shelf-stuff {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 3vh;
+    width: 100%;
+}
+
+main .primary-edit-shelf-stuff h2 {
+    font-size: 50px;
+    font-weight: bold;
+    padding: 3vh;
+}
+
+main .primary-edit-shelf-stuff .input-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+main .primary-edit-shelf-stuff .input-group label {
+    font-size: 20px;
+    margin-right: 20px;
+}
+
+main .primary-edit-shelf-stuff .input-group input {
+    border-radius: 25px 0 0 25px;
+}
+
+main .primary-edit-shelf-stuff .search-results {
+    border: dashed white thin;
+    border-radius: 10px;
+    background-color: #797979;
+    margin: 20px;
+    padding: 1vw;
+    padding-bottom: 0vw;
+    font-size: 20px;
+    max-width: 90%;
+}
+
+main .primary-edit-shelf-stuff .search-results p {
+    font-style: italic;
+}
+
+main .primary-edit-shelf-stuff .search-results ul li {
+    text-align: left;
+    list-style: none;
+}
+
+main .primary-edit-shelf-stuff .search-results ul li:hover {
+    text-decoration: underline;
+}
+
+main .primary-edit-shelf-stuff .edit-shelf-buttons {
+    display: flex;
+    flex-direction: row;
+}
+
+main .primary-edit-shelf-stuff .edit-shelf-buttons button {
+    width: 100%;
+    margin: 1vh;
+    font-size: 20px;
+}
+
+main .checkbox-stuff {
+    width: 80%;
+    background-color: #797979;
+    padding: 0.75vw;
+    margin-top: 3vw;
+    margin-bottom: 3vw;
+
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+
+    border: thin dotted white;
+    border-radius: 10px;
+
+    /*min-width: 900px;*/
+}
+
+main .checkbox-stuff h3 {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+main .checkbox-stuff table {
+    border-spacing: 1vw;
+    border-collapse: separate;
+}
+
+main .checkbox-stuff table td {
+    font-size: 20px;
+    padding: 0 30px;
+    align-items: center;
+}
+
+#underline-mc {
+    color: lightblue;
+}
+
+footer {
+    padding: 0.25em;
+    margin: 0.5em;
+    margin-top: auto;
+    text-align: right;
+    border: dashed thin white;
+    font-style: italic;
+}
+
+@media (max-width: 900px) {
+    main .checkbox-stuff {
+        width: 90%;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        white-space: nowrap;
+
+        text-align: left;
+        align-items: normal;
+    }
+
+    main .checkbox-stuff h3 {
+        text-align: center;
+        align-items: center;
+        font-size: clamp(20px, 3vw, 30px);
+    }
+}
+
+@media (max-height: 700px) {
+    footer {
+        display: none;
+    }
+}
+
+@media (max-width: 450px) {
+    .input-group label {
+        display: none;
+    }
+}
+
+@media (max-width: 400px) {
+    main .primary-edit-shelf-stuff h2 {
+        font-size: clamp(1.5625rem, -3.125rem + 25vw, 3.125rem);
+    }
+}
+
+@media (orientation: portrait) {
+    main a {
+        text-decoration: underline;
+    }
+}

@@ -84,12 +84,16 @@ main {
     text-align: center;
     align-items: center;
     margin-right: 5vw;
+    animation-name: leftSideAnimate;
+    animation-duration: 2s;
 }
 
 .main-top-layer table {
     text-align: center;
     align-items: center;
     margin-left: 5vw;
+    animation-name: rightSideAnimate;
+    animation-duration: 2s;
 }
 
 .main-top-layer tr, td, th {
@@ -246,9 +250,17 @@ footer {
 @keyframes rightSideAnimate {
     0% {
         transform: translateX(200%);
+        opacity: 0;
     }
+
+    20% {
+        opacity: 0;
+    }
+
     100% {
         transform: translateX(0);
+        opacity: 1;
     }
+
 }
 
