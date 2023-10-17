@@ -45,3 +45,13 @@ For this deliverable I built out the structure of my application using HTML.
 - **Login** - Input box for username and password, and a submit button for "log in" and "sign up."
 - **Database** - The search results on edit-shelf.html represent generated search data from The Movie Database (TMDB).
 - **WebSocket** - Other users' activity on the home page represents realtime additions and removals from other users' shelves.
+
+### CSS Deliverable
+For this deliverable I properly styled the application into its final appearance.
+- **Header, footer, and main content body**. Uniquely patterned consistent header design!
+- **Navigation elements** - No more oddly colored links or underlines. The links become underlined only when the mouse hovers over them.
+- **Responsive to window resizing** - My app looks great on all window sizes and devices. Items naturally scale, rearrange, or are removed based on the screen size.
+- **Application elements** - Used good contrast and whitespace. I especially tried to use bordered windows and buttons when possible to clearly mark different parts of the app. Good balance of self-made and Bootstrap integration.
+- **Application text content** - Consistent fonts, good spacing, and proper styling. Occasionally, different colors are used for emphasis.
+- **Application images** - Images scale in response to screen size.
+- **Animations** - On most pages of my website, various elements are animated in to give the website more *pizzaz*.
