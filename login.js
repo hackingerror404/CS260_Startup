@@ -10,6 +10,7 @@ function login() {
 
     for (let li of loginInfo) {
         if (li.username === usernamePossible.value && li.password === passwordPossible.value) {
+            localStorage.setItem("localLogin", usernamePossible.value);
             window.location.href = "home.html";
         }
     }
@@ -41,5 +42,6 @@ function register() {
 
     loginInfo.push({username: usernameEl.value, password: passwordEl.value});
     localStorage.setItem("loginInfo", JSON.stringify(loginInfo));
+    localStorage.setItem("localLogin", usernamePossible.value);
     window.location.href = "home.html";
 }
