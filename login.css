@@ -42,7 +42,7 @@ main {
     align-items: center;
 }
 
-#bootstrap-overrides div div form div {
+#bootstrap-overrides div div div {
     padding: 0.25em;
 }
 

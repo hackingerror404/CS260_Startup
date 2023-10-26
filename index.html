@@ -13,6 +13,7 @@
         crossorigin="anonymous" />
         
         <link rel="stylesheet" href="login.css" />
+        <script src="login.js"></script>
       </head>
 
       <body>
@@ -26,7 +27,7 @@
       <main id="bootstrap-overrides">
         <div>
           <div>
-            <form class="authentication-input-stuff" method="get" action="home.html">
+            <form class="authentication-input-stuff" onsubmit="preventFormSubmit(event)">
               <div class="mb-3">
                 <label for="username" id="username-label">Username: </label>
                 <input type="text" class="form-control rounded" id="username" placeholder="USERNAME">
@@ -35,8 +36,8 @@
                 <label for="password" id="password-label">Password: </label>
                 <input type="text" class="form-control rounded" id="password" placeholder="PASSWORD" />
               </div>
-              <button type="submit" class="btn btn-outline-primary" id="login-button">Login</button>
-              <button type="submit" class="btn btn-outline-primary" id="signup-button">Sign Up</button>
+              <button type="submit" class="btn btn-outline-primary" onclick="login()" id="login-button">Login</button>
+              <button type="submit" class="btn btn-outline-primary" onclick="register()" id="signup-button">Sign Up</button>
             </form>
           </div>
         </div>
