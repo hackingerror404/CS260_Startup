@@ -8,6 +8,7 @@
         <link rel="icon" href="favicon.ico" />
 
         <link rel="stylesheet" href="shelf.css" />
+        <script src="shelf.js"></script>
     </head>
     <body>
         <header>
@@ -27,12 +28,12 @@
 
         <main>
             <div class="main-top-layer">
-                <h2>lemonlimebeats's shelf</h2>
+                <h2 id="shelf-username">lemonlimebeats's shelf</h2>
                 <table>
                     <tr>
-                        <td>82</td>
-                        <td>81</td>
-                        <td>45</td>
+                        <td id="numberOfFilms">82</td>
+                        <td id="numberOfPhysFilms">81</td>
+                        <td id="numberOfDigFilms">45</td>
                     </tr>
                     <tr>
                         <td>Films</td>
@@ -45,8 +46,8 @@
             </div>
 
             <div class="shelf-contents">
-                <table>
-                    <tr>
+                <table id="#table-wrapper">
+                    <tr class="shelf-row">
                         <td id="movie-title">Back to the Future</td>
                         <td>
                             <div class="format-letter">
@@ -68,7 +69,7 @@
                             </div>
                         </td>
                     </tr>
-                    <tr>
+                    <tr class="shelf-row">
                         <td id="movie-title">Casino Royale</td>
                         <td id="format-letter">
                             <div class="format-letter">
@@ -76,14 +77,14 @@
                             </div>
                         </td>
                         <td>
-                            <div>
+                            <div class="multiple-formats">
                                 <div class="physical-format">
                                     DVD
                                 </div>
                             </div>
                         </td>
                     </tr>
-                    <tr>
+                    <tr class="shelf-row">
                         <td id="movie-title">Dune</td>
                         <td id="format-letter">
                             <div>
@@ -91,14 +92,14 @@
                             </div>
                         </td>
                         <td>
-                            <div>
+                            <div class="multiple-formats">
                                 <div class="digital-format">
                                     Prime Video
                                 </div>
                             </div> 
                         </td>
                     </tr>
-                    <tr>
+                    <tr class="shelf-row">
                         <td id="movie-title">Howl's Moving Castle</td>
                         <td id="format-letter">
                             <div class="format-letter">
@@ -116,7 +117,7 @@
                             </div>
                         </td>
                     </tr>
-                    <tr>
+                    <tr class="shelf-row">
                         <td id="movie-title">The Lego Movie</td>
                         <td>
                             <div class="format-letter">

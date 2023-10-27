@@ -13,8 +13,6 @@ function updateUserInfo() {
             "numberOfDigFilms": 0
         }
         localStorage.setItem(localUsername, JSON.stringify(shelfList));
-        console.log(shelfList);
-        console.log(JSON.stringify(shelfList));
     }
 
     let numberOfFilms = document.getElementById("numberOfFilms");
@@ -23,6 +21,9 @@ function updateUserInfo() {
     numberOfPhysFilms.textContent = shelfList.numberOfPhysFilms;
     let numberOfDigFilms = document.getElementById("numberOfDigFilms");
     numberOfDigFilms.textContent = shelfList.numberOfDigFilms;
+
+    let shelfUsername = document.getElementById("home-username");
+    shelfUsername.innerHTML = `<a href="shelf.html">${localUsername}</a>`;
 
     generateActivity();
 }
@@ -47,13 +48,13 @@ function generateActivity() {
 
     if (divChildren === 0) {
         chatText.innerHTML = 
-            `<p><a href="shelf.html">${selectRandArrayEl(usernames)}</a> ${selectRandArrayEl(decisions)} <em>
+            `<p>${selectRandArrayEl(usernames)} ${selectRandArrayEl(decisions)} <em>
             ${selectRandArrayEl(movieTitles)}</em> on ${selectRandArrayEl(formats)}.</p>`;
     }
 
     else if (divChildren >= 1 && divChildren < 11) {
         const newElement = document.createElement('p');
-        newElement.innerHTML = `<a href="shelf.html">${selectRandArrayEl(usernames)}</a> ${selectRandArrayEl(decisions)} <em>
+        newElement.innerHTML = `${selectRandArrayEl(usernames)} ${selectRandArrayEl(decisions)} <em>
             ${selectRandArrayEl(movieTitles)}</em> on ${selectRandArrayEl(formats)}.`;
 
         chatText.insertBefore(newElement, chatText.firstChild);
@@ -66,7 +67,7 @@ function generateActivity() {
     else {
         chatText.removeChild(chatText.lastElementChild);
         const newElement = document.createElement('p');
-        newElement.innerHTML = `<a href="shelf.html">${selectRandArrayEl(usernames)}</a> ${selectRandArrayEl(decisions)} <em>
+        newElement.innerHTML = `${selectRandArrayEl(usernames)} ${selectRandArrayEl(decisions)} <em>
           ${selectRandArrayEl(movieTitles)}</em> on ${selectRandArrayEl(formats)}.`;
 
         chatText.insertBefore(newElement, chatText.firstChild);
