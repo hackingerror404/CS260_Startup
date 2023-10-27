@@ -11,6 +11,7 @@
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
         crossorigin="anonymous" />
         <link rel="stylesheet" href="edit-shelf.css" />
+        <script src="edit-shelf.js"></script>
     </head>
     <body>
         <div class="body-wrapper">
@@ -34,21 +35,21 @@
                     <h2>Edit Your Shelf</h2>
                     <div class="">
                         <div class="input-group">
-                            <label for="movie_name">Movie Name:</label>
-                            <input type="text" id="movie_name" class="form-control" placeholder="MOVIE NAME" value="Bla">
-                            <button class="btn btn-primary" type="button">Search</button>
+                            <label for="movie-name">Movie Name:</label>
+                            <input type="text" id="movie-name" class="form-control" placeholder="MOVIE NAME">
+                            <button class="btn btn-primary" id="search-button" type="button">Search</button>
                         </div>
                     </div>
                     <div class="search-results">
                         <p>Search Results from TMDB.org:</p>
-                        <ul>
+                        <ul id="search-results">
                             <li>Blade</li>
                             <li>Blade Runner</li>
                             <li>Blade Runner 2049</li>
                             <li>Blade of the Immortal</li>
                         </ul>
                     </div>
-                    <form method="get" action="shelf.html">
+                    <form method="get" onSubmit="preventFormSubmit(event)">
                         <div class="edit-shelf-buttons">
                             <button type="submit" class="btn btn-outline-primary" id="add-button">Add</button>
                             <button type="submit" class="btn btn-outline-primary" id="delete-button">Delete</button>
@@ -61,32 +62,32 @@
                     <table>
                         <tr id="underline-mc">
                             <td>Physical</td>
-                            <td>Digitals</td>
+                            <td>Digital</td>
                         </tr>
                         <tr>
                             <td>
-                                <input type="checkbox" id="dvd" name="dvd" value="DVD">
-                                <label for="movie_physical_format">DVD</label>
-                                <input type="checkbox" id="bluray" name="bluray" value="Bluray">
-                                <label for="movie_physical_format">Blu-Ray</label>
+                                <input type="checkbox" id="dvd" name="formatCheck" value="DVD">
+                                <label for="dvd">DVD</label>
+                                <input type="checkbox" id="bluray" name="formatCheck" value="Bluray">
+                                <label for="bluray">Blu-Ray</label>
                             </td>
                             <td id="multiple-checks">
-                                <input type="checkbox" id="moviesAnywhere" name="moviesAnywhere" value="MoviesAnywhere">
-                                <label for="movie_digital_location">Movies Anywhere</label>
-                                <input type="checkbox" id="vudu" name="vudu" value="Vudu">
-                                <label for="movie_digital_location">Vudu</label>
+                                <input type="checkbox" id="moviesAnywhere" name="formatCheck" value="MoviesAnywhere">
+                                <label for="moviesAnywhere">Movies Anywhere</label>
+                                <input type="checkbox" id="vudu" name="formatCheck" value="Vudu">
+                                <label for="vudu">Vudu</label>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <input type="checkbox" id="4k_bluray" name="4k_bluray" value="4K_Bluray">
-                                <label for="movie_physical_format">4K Blu-Ray</label>
+                                <input type="checkbox" id="4k_bluray" name="formatCheck" value="4K_Bluray">
+                                <label for="4k_bluray">4K Blu-Ray</label>
                             </td>
                             <td id="multiple-checks">
-                                <input type="checkbox" id="primeVideo" name="primeVideo" value="PrimeVideo">
-                                <label for="movie_digital_location">Prime Video</label>
-                                <input type="checkbox" id="itunes" name="itunes" value="iTunes">
-                                <label for="movie_digital_location">iTunes</label>
+                                <input type="checkbox" id="primeVideo" name="formatCheck" value="PrimeVideo">
+                                <label for="primeVideo">Prime Video</label>
+                                <input type="checkbox" id="appleTV" name="formatCheck" value="AppleTV">
+                                <label for="appleTV">iTunes</label>
                             </td>
                         </tr>
                     </table>

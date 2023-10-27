@@ -42,6 +42,6 @@ function register() {
 
     loginInfo.push({username: usernameEl.value, password: passwordEl.value});
     localStorage.setItem("loginInfo", JSON.stringify(loginInfo));
-    localStorage.setItem("localLogin", usernamePossible.value);
+    localStorage.setItem("localLogin", usernameEl.value);
     window.location.href = "home.html";
 }

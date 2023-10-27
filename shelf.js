@@ -14,8 +14,6 @@ function updateUserInfo() {
             "numberOfDigFilms": 0
         }
         localStorage.setItem(localUsername, JSON.stringify(shelfList));
-        console.log(shelfList);
-        console.log(JSON.stringify(shelfList));
     }
 
     let numberOfFilms = document.getElementById("numberOfFilms");
