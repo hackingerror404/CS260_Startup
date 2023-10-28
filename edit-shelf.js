@@ -18,6 +18,7 @@ function initSearchBox() {
 
     searchBox.addEventListener('input', function() {
         movieTitleSelected = false;
+        checkButtonConditions();
     });    
 
     resultsContainer.innerHTML = '';
@@ -54,10 +55,14 @@ function initSearchBox() {
 
 function checkButtonConditions() {
     const addButton = document.getElementById("add-button");
-    const deleteButton = document.getElementById("delete-button");    
-    if (movieTitleSelected && atLeastOneCheckbox(`name="formatCheck"`)) {
-        addButton.removeAttribute('disabled');
+    const deleteButton = document.getElementById("delete-button");
+    if (movieTitleSelected) {
         deleteButton.removeAttribute('disabled');
+        if (atLeastOneCheckbox(`name="formatCheck"`)) {
+            addButton.removeAttribute('disabled');
+        } else {
+            addButton.setAttribute('disabled', true);
+        }
     } else {
         addButton.setAttribute('disabled', true);
         deleteButton.setAttribute('disabled', true);
@@ -100,6 +105,7 @@ function initButtons() {
             shelfList = [];
         }
         shelfList.push(movieObj);
+        shelfList.sort((a, b) => a.movieTitle.localeCompare(b.movieTitle));
         localStorage.setItem(localUsernameShelf, JSON.stringify(shelfList));
 
         shelfStats.numberOfFilms++;
@@ -115,9 +121,27 @@ function initButtons() {
     });
 
     deleteButton.addEventListener('click', function() {
-        // remove movie from database
+        const searchBox = document.getElementById('movie-name');
+        const movieObj = shelfList.find(obj => obj.movieTitle === searchBox.value) || false;
 
-        window.location.href = "shelf.html";
+        if (movieObj === false) {
+            alert("Please select a movie in your collection!");
+        } else {
+            shelfList = shelfList.filter(obj => obj.movieTitle !== searchBox.value);
+            shelfList.sort((a, b) => a.movieTitle.localeCompare(b.movieTitle));
+            localStorage.setItem(localUsernameShelf, JSON.stringify(shelfList));
+
+            shelfStats.numberOfFilms--;
+            if (movieObj.isPhysical) {
+                shelfStats.numberOfPhysFilms--;
+            }    
+            if (movieObj.isDigital) {
+                shelfStats.numberOfDigFilms--;
+            }    
+            localStorage.setItem(localUsername, JSON.stringify(shelfStats));
+
+            window.location.href = "shelf.html";
+        }        
     })
 }
 
