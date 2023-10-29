@@ -107,7 +107,7 @@ if (byuElement) {
 
 - What is the opening HTML tag for a paragraph, ordered list, unordered list, second level heading, first level heading, third level heading?
 
-Paragraph: <p>, Ordered List: <ol>, Unordered List: <ul>, second level heading: <h2>, first level heading: <h1>, third: <h3>
+Paragraph: `<p>`, Ordered List: `<ol>`, Unordered List: `<ul>`, second level heading: `<h2>`, first level heading: `<h1>`, third: `<h3>`
 
 - How do you declare the document type to be html?
 
