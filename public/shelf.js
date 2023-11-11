@@ -5,23 +5,23 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function updateUserInfo() {
     let localUsername = localStorage.getItem("localLogin");
-    let shelfList = JSON.parse(localStorage.getItem(localUsername)) || false;
+    let shelfStats = JSON.parse(localStorage.getItem(localUsername)) || false;
 
-    if (shelfList === false) {
-        shelfList = {
+    if (shelfStats === false) {
+        shelfStats = {
             "numberOfFilms": 0,
             "numberOfPhysFilms": 0,
             "numberOfDigFilms": 0
         }
-        localStorage.setItem(localUsername, JSON.stringify(shelfList));
+        localStorage.setItem(localUsername, JSON.stringify(shelfStats));
     }
 
     let numberOfFilms = document.getElementById("numberOfFilms");
-    numberOfFilms.textContent = shelfList.numberOfFilms;
+    numberOfFilms.textContent = shelfStats.numberOfFilms;
     let numberOfPhysFilms = document.getElementById("numberOfPhysFilms");
-    numberOfPhysFilms.textContent = shelfList.numberOfPhysFilms;
+    numberOfPhysFilms.textContent = shelfStats.numberOfPhysFilms;
     let numberOfDigFilms = document.getElementById("numberOfDigFilms");
-    numberOfDigFilms.textContent = shelfList.numberOfDigFilms;
+    numberOfDigFilms.textContent = shelfStats.numberOfDigFilms;
 
     const shelfUsername = document.getElementById("shelf-username");
     shelfUsername.innerText = `${localUsername}'s shelf`;
