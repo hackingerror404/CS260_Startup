@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
+    //loadShelfStats();
     initSearchBox();
     initButtons();
     initCheckboxes();
@@ -88,16 +89,9 @@ function initButtons() {
     let localUsernameShelf = localStorage.getItem("localLogin") + "_shelf";
     let shelfList = JSON.parse(localStorage.getItem(localUsernameShelf)) || false;
 
-    let shelfStats = JSON.parse(localStorage.getItem(localUsername)) || false;
-
-    if (shelfStats === false) {
-        shelfStats = {
-            "numberOfFilms": 0,
-            "numberOfPhysFilms": 0,
-            "numberOfDigFilms": 0
-        }
-        localStorage.setItem(localUsername, JSON.stringify(shekfStats));
-    }
+    let shelfStatsData = localStorage.getItem("shelfStats");
+    let shelfStatsObject = JSON.parse(shelfStatsData);
+    let shelfStats = new Map(Object.entries(shelfStatsObject || {})); // Handle the case when shelfStatsObject is null or undefined
     
     addButton.addEventListener('click', function() {
         const movieObj = createMovieObj();
@@ -108,14 +102,7 @@ function initButtons() {
         shelfList.sort((a, b) => a.movieTitle.localeCompare(b.movieTitle));
         localStorage.setItem(localUsernameShelf, JSON.stringify(shelfList));
 
-        shelfStats.numberOfFilms++;
-        if (movieObj.isPhysical) {
-            shelfStats.numberOfPhysFilms++;
-        }    
-        if (movieObj.isDigital) {
-            shelfStats.numberOfDigFilms++;
-        }    
-        localStorage.setItem(localUsername, JSON.stringify(shelfStats));
+        updateShelfStats(true, movieObj, shelfStats);
 
         window.location.href = "shelf.html";
     });
@@ -131,14 +118,7 @@ function initButtons() {
             shelfList.sort((a, b) => a.movieTitle.localeCompare(b.movieTitle));
             localStorage.setItem(localUsernameShelf, JSON.stringify(shelfList));
 
-            shelfStats.numberOfFilms--;
-            if (movieObj.isPhysical) {
-                shelfStats.numberOfPhysFilms--;
-            }    
-            if (movieObj.isDigital) {
-                shelfStats.numberOfDigFilms--;
-            }    
-            localStorage.setItem(localUsername, JSON.stringify(shelfStats));
+            updateShelfStats(false, movieObj, shelfStats);
 
             window.location.href = "shelf.html";
         }        

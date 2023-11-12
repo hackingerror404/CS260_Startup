@@ -34,6 +34,7 @@ apiRouter.post('/shelfStats', (req, res) => {
   shelfStats = updateShelfStats(requestData, shelfStats);
   console.log("----------------UPDATED SHELF STATS-------------")
   res.send(shelfStats);
+
 });
 
 // Return the application's default page if the path is unknown
@@ -45,24 +46,20 @@ app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
 
-// updateScores considers a new score for inclusion in the high scores.
-// The high scores are saved in memory and disappear whenever the service is restarted.
 let shelfStats = new Map();
 
 function getShelfStats(username, allShelfStats) {
-  let localShelfStats;
-  if (allShelfStats.has(username)) {
-    localShelfStats = allShelfStats.get(username);
-  } else {
+
+  if (!allShelfStats.has(username)) {
     allShelfStats.set(username, {
       "numberOfFilms": 0,
       "numberOfPhysFilms": 0,
       "numberOfDigFilms": 0
     });
-    localShelfStats = allShelfStats.get(username);
+    shelfStats = allShelfStats;
   }
 
-  return localShelfStats;
+  return allShelfStats;
 }
 
 function updateShelfStats(newShelfStats, allShelfStats) {

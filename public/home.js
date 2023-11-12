@@ -1,45 +1,27 @@
-document.addEventListener('DOMContentLoaded', function() {
-    loadShelfStats();
+document.addEventListener('DOMContentLoaded', async() => {
+    await loadShelfStats();
     updateUserInfo();
 });
 
 function updateUserInfo() {
     let localUsername = localStorage.getItem("localLogin");
-    let shelfStats = JSON.parse(localStorage.getItem(localUsername));
+    let shelfStatsData = localStorage.getItem("shelfStats");
+    
+    let shelfStatsObject = JSON.parse(shelfStatsData);
+    let shelfStats = new Map(Object.entries(shelfStatsObject || {})); // Handle the case when shelfStatsObject is null or undefined
+    let localShelfStats = shelfStats.get(localUsername);
 
     let numberOfFilms = document.getElementById("numberOfFilms");
-    numberOfFilms.textContent = shelfStats.numberOfFilms;
+    numberOfFilms.textContent = localShelfStats.numberOfFilms;
     let numberOfPhysFilms = document.getElementById("numberOfPhysFilms");
-    numberOfPhysFilms.textContent = shelfStats.numberOfPhysFilms;
+    numberOfPhysFilms.textContent = localShelfStats.numberOfPhysFilms;
     let numberOfDigFilms = document.getElementById("numberOfDigFilms");
-    numberOfDigFilms.textContent = shelfStats.numberOfDigFilms;
+    numberOfDigFilms.textContent = localShelfStats.numberOfDigFilms;
 
     let shelfUsername = document.getElementById("home-username");
     shelfUsername.innerHTML = `<a href="shelf.html">${localUsername}</a>`;
 
     generateActivity();
-}
-
-async function loadShelfStats() {
-    let localUsername = localStorage.getItem("localLogin");
-    let shelfStats = [];
-    try {
-        const response = await fetch(`http://localhost:4000/api/shelfStats/${localUsername}`);
-        shelfStats = await response.json();
-        // Save the shelfStats in case we go offline in the future
-        localStorage.setItem(localUsername, JSON.stringify(shelfStats));
-    } catch {
-        let shelfStats = JSON.parse(localStorage.getItem(localUsername)) || false;
-
-        if (shelfStats === false) {
-            shelfStats = {
-                "numberOfFilms": 0,
-                "numberOfPhysFilms": 0,
-                "numberOfDigFilms": 0
-            }
-            localStorage.setItem(localUsername, JSON.stringify(shelfStats));
-        }
-    }
 }
 
 const movieTitles = ["Arrival", "Back to the Future", "The Batman", "Batman Begins", "Birdman", "Black Swan",

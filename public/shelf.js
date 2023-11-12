@@ -1,27 +1,23 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async() => {
+    //await loadShelfStats();
     updateUserInfo();
     updateShelfContents();
 });
 
 function updateUserInfo() {
     let localUsername = localStorage.getItem("localLogin");
-    let shelfStats = JSON.parse(localStorage.getItem(localUsername)) || false;
+    let shelfStatsData = localStorage.getItem("shelfStats");
 
-    if (shelfStats === false) {
-        shelfStats = {
-            "numberOfFilms": 0,
-            "numberOfPhysFilms": 0,
-            "numberOfDigFilms": 0
-        }
-        localStorage.setItem(localUsername, JSON.stringify(shelfStats));
-    }
+    let shelfStatsObject = JSON.parse(shelfStatsData);
+    let shelfStats = new Map(Object.entries(shelfStatsObject || {})); // Handle the case when shelfStatsObject is null or undefined
+    let localShelfStats = shelfStats.get(localUsername);
 
     let numberOfFilms = document.getElementById("numberOfFilms");
-    numberOfFilms.textContent = shelfStats.numberOfFilms;
+    numberOfFilms.textContent = localShelfStats.numberOfFilms;
     let numberOfPhysFilms = document.getElementById("numberOfPhysFilms");
-    numberOfPhysFilms.textContent = shelfStats.numberOfPhysFilms;
+    numberOfPhysFilms.textContent = localShelfStats.numberOfPhysFilms;
     let numberOfDigFilms = document.getElementById("numberOfDigFilms");
-    numberOfDigFilms.textContent = shelfStats.numberOfDigFilms;
+    numberOfDigFilms.textContent = localShelfStats.numberOfDigFilms;
 
     const shelfUsername = document.getElementById("shelf-username");
     shelfUsername.innerText = `${localUsername}'s shelf`;
