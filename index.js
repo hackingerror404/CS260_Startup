@@ -10,6 +10,9 @@ app.use(express.json());
 // Serve up the front-end static content hosting
 app.use(express.static('public'));
 
+let cors = require('cors');
+app.use(cors());
+
 // Router for service endpoints
 var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
@@ -20,10 +23,16 @@ apiRouter.get('/shelf/:username', (req, res) => {
   res.send({name: req.params.username});
 });
 
-// SubmitShelfStats
+apiRouter.get('/shelfStats/:username', (req, res) => {
+  const userShelfStats = getShelfStats(req.params.username, shelfStats);
+  res.send(userShelfStats);
+});
+
+// update shelfStats
 apiRouter.post('/shelfStats', (req, res) => {
   const requestData = req.body;
   shelfStats = updateShelfStats(requestData, shelfStats);
+  console.log("----------------UPDATED SHELF STATS-------------")
   res.send(shelfStats);
 });
 
@@ -39,6 +48,23 @@ app.listen(port, () => {
 // updateScores considers a new score for inclusion in the high scores.
 // The high scores are saved in memory and disappear whenever the service is restarted.
 let shelfStats = new Map();
+
+function getShelfStats(username, allShelfStats) {
+  let localShelfStats;
+  if (allShelfStats.has(username)) {
+    localShelfStats = allShelfStats.get(username);
+  } else {
+    allShelfStats.set(username, {
+      "numberOfFilms": 0,
+      "numberOfPhysFilms": 0,
+      "numberOfDigFilms": 0
+    });
+    localShelfStats = allShelfStats.get(username);
+  }
+
+  return localShelfStats;
+}
+
 function updateShelfStats(newShelfStats, allShelfStats) {
   for (const [username, values] of Object.entries(newShelfStats)) {
     const { numberOfFilms, numberOfPhysFilms, numberOfDigFilms } = values;

@@ -1,19 +1,11 @@
 document.addEventListener('DOMContentLoaded', function() {
+    loadShelfStats();
     updateUserInfo();
 });
 
 function updateUserInfo() {
     let localUsername = localStorage.getItem("localLogin");
-    let shelfStats = JSON.parse(localStorage.getItem(localUsername)) || false;
-
-    if (shelfStats === false) {
-        shelfStats = {
-            "numberOfFilms": 0,
-            "numberOfPhysFilms": 0,
-            "numberOfDigFilms": 0
-        }
-        localStorage.setItem(localUsername, JSON.stringify(shelfStats));
-    }
+    let shelfStats = JSON.parse(localStorage.getItem(localUsername));
 
     let numberOfFilms = document.getElementById("numberOfFilms");
     numberOfFilms.textContent = shelfStats.numberOfFilms;
@@ -26,6 +18,38 @@ function updateUserInfo() {
     shelfUsername.innerHTML = `<a href="shelf.html">${localUsername}</a>`;
 
     generateActivity();
+}
+
+async function loadShelfStats() {
+    let localUsername = localStorage.getItem("localLogin");
+    let shelfStats = [];
+    try {
+        const response = await fetch(`http://localhost:4000/api/shelfStats/${localUsername}`);
+        shelfStats = await response.json();
+        // Save the shelfStats in case we go offline in the future
+        localStorage.setItem(localUsername, JSON.stringify(shelfStats));
+    } catch {
+        let shelfStats = JSON.parse(localStorage.getItem(localUsername)) || false;
+
+        if (shelfStats === false) {
+            shelfStats = {
+                "numberOfFilms": 0,
+                "numberOfPhysFilms": 0,
+                "numberOfDigFilms": 0
+            }
+            localStorage.setItem(localUsername, JSON.stringify(shelfStats));
+        }
+    }
+    /**return fetch(`http://localhost:4000/shelfStats/${username}`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => console.log(data))
+    .catch(error => console.error('Error:', error));*/
+
 }
 
 const movieTitles = ["Arrival", "Back to the Future", "The Batman", "Batman Begins", "Birdman", "Black Swan",
