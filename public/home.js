@@ -40,16 +40,6 @@ async function loadShelfStats() {
             localStorage.setItem(localUsername, JSON.stringify(shelfStats));
         }
     }
-    /**return fetch(`http://localhost:4000/shelfStats/${username}`)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-    })
-    .then(data => console.log(data))
-    .catch(error => console.error('Error:', error));*/
-
 }
 
 const movieTitles = ["Arrival", "Back to the Future", "The Batman", "Batman Begins", "Birdman", "Black Swan",
