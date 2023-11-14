@@ -1,4 +1,6 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
+    await loadShelfStats();
+    await loadShelfContents();
     initSearchBox();
     initButtons();
     initCheckboxes();
@@ -85,20 +87,22 @@ function initButtons() {
     deleteButton.setAttribute('disabled', true);
 
     let localUsername = localStorage.getItem("localLogin");
-    let localUsernameShelf = localStorage.getItem("localLogin") + "_shelf";
-    let shelfList = JSON.parse(localStorage.getItem(localUsernameShelf)) || false;
+    let localShelfContentData = localStorage.getItem("shelf");
+    let localShelfContent = JSON.parse(localShelfContentData);
 
     let localShelfStatsData = localStorage.getItem("shelfStats");
     let localShelfStats = JSON.parse(localShelfStatsData);
     
     addButton.addEventListener('click', async function() {
         const movieObj = createMovieObj();
-        if (shelfList == false) {
+        /**if (shelfList == false) {
             shelfList = [];
         }
         shelfList.push(movieObj);
         shelfList.sort((a, b) => a.movieTitle.localeCompare(b.movieTitle));
-        localStorage.setItem(localUsernameShelf, JSON.stringify(shelfList));
+        localStorage.setItem(localUsernameShelf, JSON.stringify(shelfList))*/
+
+        await updateShelfContents(true, movieObj, movieObj.movieTitle, localShelfContent);
 
         await updateShelfStats(true, movieObj, localShelfStats);
 
@@ -107,14 +111,12 @@ function initButtons() {
 
     deleteButton.addEventListener('click', async function() {
         const searchBox = document.getElementById('movie-name');
-        const movieObj = shelfList.find(obj => obj.movieTitle === searchBox.value) || false;
+        const movieObj = localShelfContent.find(obj => obj.movieTitle === searchBox.value) || false;
 
         if (movieObj === false) {
             alert("Please select a movie in your collection!");
         } else {
-            shelfList = shelfList.filter(obj => obj.movieTitle !== searchBox.value);
-            shelfList.sort((a, b) => a.movieTitle.localeCompare(b.movieTitle));
-            localStorage.setItem(localUsernameShelf, JSON.stringify(shelfList));
+            await updateShelfContents(false, movieObj, searchBox.value, localShelfContent);
 
             await updateShelfStats(false, movieObj, localShelfStats);
 

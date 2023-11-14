@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', async() => {
+    await loadShelfStats();
+    await loadShelfContents();
     updateUserInfo();
     updateShelfContents();
 });
@@ -20,13 +22,13 @@ function updateUserInfo() {
 }
 
 function updateShelfContents() {
-    let localUsernameShelf = localStorage.getItem("localLogin") + "_shelf";
-    let shelfList = JSON.parse(localStorage.getItem(localUsernameShelf)) || false;
+    let localShelfContentData = localStorage.getItem("shelf");
+    let localShelfContent = JSON.parse(localShelfContentData) || false;
     const userShelf = document.getElementById('#table-wrapper');
 
     userShelf.innerHTML = "";
-    if (shelfList !== false) {
-        for (let shelfItem of shelfList) {
+    if (localShelfContent !== false) {
+        for (let shelfItem of localShelfContent) {
             const userShelfRow = document.createElement("tr");
             userShelfRow.className = "shelf-row";
     
