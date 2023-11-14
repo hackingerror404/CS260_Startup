@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    //loadShelfStats();
     initSearchBox();
     initButtons();
     initCheckboxes();
@@ -89,11 +88,10 @@ function initButtons() {
     let localUsernameShelf = localStorage.getItem("localLogin") + "_shelf";
     let shelfList = JSON.parse(localStorage.getItem(localUsernameShelf)) || false;
 
-    let shelfStatsData = localStorage.getItem("shelfStats");
-    let shelfStatsObject = JSON.parse(shelfStatsData);
-    let shelfStats = new Map(Object.entries(shelfStatsObject || {})); // Handle the case when shelfStatsObject is null or undefined
+    let localShelfStatsData = localStorage.getItem("shelfStats");
+    let localShelfStats = JSON.parse(localShelfStatsData);
     
-    addButton.addEventListener('click', function() {
+    addButton.addEventListener('click', async function() {
         const movieObj = createMovieObj();
         if (shelfList == false) {
             shelfList = [];
@@ -102,12 +100,12 @@ function initButtons() {
         shelfList.sort((a, b) => a.movieTitle.localeCompare(b.movieTitle));
         localStorage.setItem(localUsernameShelf, JSON.stringify(shelfList));
 
-        updateShelfStats(true, movieObj, shelfStats);
+        await updateShelfStats(true, movieObj, localShelfStats);
 
         window.location.href = "shelf.html";
     });
 
-    deleteButton.addEventListener('click', function() {
+    deleteButton.addEventListener('click', async function() {
         const searchBox = document.getElementById('movie-name');
         const movieObj = shelfList.find(obj => obj.movieTitle === searchBox.value) || false;
 
@@ -118,10 +116,10 @@ function initButtons() {
             shelfList.sort((a, b) => a.movieTitle.localeCompare(b.movieTitle));
             localStorage.setItem(localUsernameShelf, JSON.stringify(shelfList));
 
-            updateShelfStats(false, movieObj, shelfStats);
+            await updateShelfStats(false, movieObj, localShelfStats);
 
             window.location.href = "shelf.html";
-        }        
+        }
     })
 }
 
@@ -152,7 +150,7 @@ function createMovieObj() {
 }
 
 function checkIfPhysical() {
-    return atLeastOneCheckbox(`id="dvd"`) || atLeastOneCheckbox(`id="bluray"` || atLeastOneCheckbox(`id="4k_bluray"`));
+    return atLeastOneCheckbox(`id="dvd"`) || atLeastOneCheckbox(`id="bluray"`) || atLeastOneCheckbox(`id="4k_bluray"`);
 }
 
 function checkIfDigital() {

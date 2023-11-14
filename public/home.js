@@ -5,11 +5,8 @@ document.addEventListener('DOMContentLoaded', async() => {
 
 function updateUserInfo() {
     let localUsername = localStorage.getItem("localLogin");
-    let shelfStatsData = localStorage.getItem("shelfStats");
-    
-    let shelfStatsObject = JSON.parse(shelfStatsData);
-    let shelfStats = new Map(Object.entries(shelfStatsObject || {})); // Handle the case when shelfStatsObject is null or undefined
-    let localShelfStats = shelfStats.get(localUsername);
+    let localShelfStatsData = localStorage.getItem("shelfStats");
+    let localShelfStats = JSON.parse(localShelfStatsData);
 
     let numberOfFilms = document.getElementById("numberOfFilms");
     numberOfFilms.textContent = localShelfStats.numberOfFilms;

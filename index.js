@@ -19,22 +19,28 @@ app.use(`/api`, apiRouter);
 
 // getShelf
 apiRouter.get('/shelf/:username', (req, res) => {
-  const username = req.params.username;
-  res.send({name: req.params.username});
+  const userShelfContent = getShelfContent(req.params.username);
+  res.send(userShelfContent);
 });
 
+// updateShelf
+apiRouter.post('/shelf/:username', (req, res) => {
+  const requestData = req.body;
+  let updatedLocalShelfContents = updateShelfContents(requestData, req.params.username);
+  res.send(updatedLocalShelfContents);
+})
+
+// get shelfStats
 apiRouter.get('/shelfStats/:username', (req, res) => {
-  const userShelfStats = getShelfStats(req.params.username, shelfStats);
+  const userShelfStats = getShelfStats(req.params.username);
   res.send(userShelfStats);
 });
 
 // update shelfStats
-apiRouter.post('/shelfStats', (req, res) => {
+apiRouter.post('/shelfStats/:username', (req, res) => {
   const requestData = req.body;
-  shelfStats = updateShelfStats(requestData, shelfStats);
-  console.log("----------------UPDATED SHELF STATS-------------")
-  res.send(shelfStats);
-
+  let updatedLocalShelfStats = updateShelfStats(requestData, req.params.username);
+  res.send(updatedLocalShelfStats);
 });
 
 // Return the application's default page if the path is unknown
@@ -46,39 +52,50 @@ app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
 
+let shelfContents = new Map();
 let shelfStats = new Map();
 
-function getShelfStats(username, allShelfStats) {
+function getShelfContent(username) {
+  let localShelfContent = shelfContents.get(username) || false;
+  if (localShelfContent === false) {
+    localShelfContent = [];
+    shelfContents.set(username, localShelfContent);
+  }
+  return localShelfContent;
+}
 
-  if (!allShelfStats.has(username)) {
-    allShelfStats.set(username, {
+function updateShelfContents(moviesArray, username) {
+  shelfContents.set(username, moviesArray);
+  return shelfContents.get(username);
+}
+
+function getShelfStats(username) {
+  if (!shelfStats.has(username)) {
+    shelfStats.set(username, {
       "numberOfFilms": 0,
       "numberOfPhysFilms": 0,
       "numberOfDigFilms": 0
     });
-    shelfStats = allShelfStats;
   }
 
-  return allShelfStats;
+  return shelfStats.get(username);
 }
 
-function updateShelfStats(newShelfStats, allShelfStats) {
-  for (const [username, values] of Object.entries(newShelfStats)) {
-    const { numberOfFilms, numberOfPhysFilms, numberOfDigFilms } = values;
+function updateShelfStats(newLocalShelfStats, username) {
+  const { numberOfFilms, numberOfPhysFilms, numberOfDigFilms } = newLocalShelfStats;
 
-    if (allShelfStats.has(username)) {
-      const existingValues = allShelfStats.get(username);
-      existingValues.numberOfFilms = numberOfFilms;
-      existingValues.numberOfPhysFilms = numberOfPhysFilms;
-      existingValues.numberOfDigFilms = numberOfDigFilms;
-    } else {
-      allShelfStats.set(username, {
-        numberOfFilms,
-        numberOfPhysFilms,
-        numberOfDigFilms,
-      });
-    }
+  if (shelfStats.has(username)) {
+    const existingValues = shelfStats.get(username);
+    existingValues.numberOfFilms = numberOfFilms;
+    existingValues.numberOfPhysFilms = numberOfPhysFilms;
+    existingValues.numberOfDigFilms = numberOfDigFilms;
+  } else {
+    shelfStats.set(username, {
+      numberOfFilms,
+      numberOfPhysFilms,
+      numberOfDigFilms,
+    });
   }
 
-  return allShelfStats;
+  return shelfStats.get(username);
 }
