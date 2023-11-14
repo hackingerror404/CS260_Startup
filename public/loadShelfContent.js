@@ -87,13 +87,6 @@ async function loadShelfContents() {
     let localUsername = localStorage.getItem("localLogin");
     let localShelfContent = [];
     try {
-        /**fetch(`${location.protocol}//${location.hostname}:4000/api/shelf/${localUsername}`)
-        .then(response => response.json())
-        .catch((error) => {
-            console.error('loadShelfContents() Fetch failed:', error);
-        });
-        localShelfContent = await response.json();*/
-
         let response = await fetch(`/api/shelf/${localUsername}`);
         if(!response.ok) throw new Error('Fetch failed');
         let data = await response.json();
@@ -122,15 +115,6 @@ async function updateShelfContents(isAdding, movieObj, movieTitle, localShelfCon
     }
 
     try {
-        /**fetch(`${location.protocol}//${location.hostname}:4000/api/shelf`, { 
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(localShelfContent), })
-        .then(response => response.json())
-        .catch((error) => {
-            console.error('updateShelfContents fetch failed: ', error);
-        });
-        localShelfContent = await response.json();*/
         const response = await fetch(`/api/shelf/${localUsername}`, {
             method: 'POST',
             headers: {'content-type': 'application/json'},

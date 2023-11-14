@@ -8,11 +8,6 @@ document.addEventListener('DOMContentLoaded', async function() {
 
 let movieTitleSelected = false;
 
-const movieTitles = ["Arrival", "Back to the Future", "The Batman", "Batman Begins", "Birdman", "Black Swan",
-        "Blade Runner 2049", "The Breadwinner", "Casablanca", "Casino Royale", "Castle in the Sky", "The Cat Returns",
-        "The Dark Knight", "Despicable Me", "Django Unchained", "Do the Right Thing", "Dune", 
-        "Everything Everywhere All at Once", "The Fablemans", "Fantastic Mr Fox", "Get Out"];
-
 function initSearchBox() {
     const searchBox = document.getElementById('movie-name');
     const searchButton = document.getElementById('search-button');
@@ -25,24 +20,45 @@ function initSearchBox() {
 
     resultsContainer.innerHTML = '';
 
-    function performSearch() {
+    async function performSearch() {
         const searchTerm = searchBox.value.toLowerCase();
         resultsContainer.innerHTML = '';
+        let searchList = [];
 
-        if (searchTerm.trim() !== '') {
-            const filteredResults = movieTitles.filter(item => item.toLowerCase().includes(searchTerm));
-            filteredResults.forEach(result => {
-                const listItem = document.createElement('li');
-                listItem.textContent = result;
-                listItem.addEventListener('click', function(event) {
-                    movieTitleSelected = true;
-                    searchBox.value = result;
-                    checkButtonConditions();
-                    performSearch();
-                });
-                resultsContainer.appendChild(listItem);
-            });
-        }
+        const options = {
+            method: 'GET',
+            headers: {
+                accept: 'application/json',
+                Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjZGJhYzRiNzdjZDE4ZTk1ZTE2N2JjYmZhOWFiOTVhOCIsInN1YiI6IjY1NTJlOGNlZDRmZTA0MDBjNDIwOTYyZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Sgf913H7RlowL9qd5q-g3pmbbbx6oMLP2LU8XMxgoTY'
+            }
+        };
+            
+        try {
+            const response = await fetch(`https://api.themoviedb.org/3/search/movie?query=${searchTerm}&include_adult=false&language=en-US&page=1`, options);
+            const data = await response.json();
+            
+            searchList = data;
+            let searchCounter = 0;
+
+            searchList.results.forEach(movie => {
+                const movieYear = movie.release_date.split('-')[0];
+                if (movieYear !== '' && searchCounter < 10) {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = movie.title + " (" + movieYear + ")";
+                    listItem.addEventListener('click', function(event) {
+                        movieTitleSelected = true;
+                        searchBox.value = movie.title;
+                        checkButtonConditions();
+                        resultsContainer.innerHTML = '';
+                        resultsContainer.appendChild(listItem);
+                    });
+                    resultsContainer.appendChild(listItem);
+                    searchCounter++;
+                }
+            })
+        } catch (err) {
+        console.error(err);
+        }    
     }
 
     searchButton.addEventListener('click', performSearch);
@@ -95,12 +111,6 @@ function initButtons() {
     
     addButton.addEventListener('click', async function() {
         const movieObj = createMovieObj();
-        /**if (shelfList == false) {
-            shelfList = [];
-        }
-        shelfList.push(movieObj);
-        shelfList.sort((a, b) => a.movieTitle.localeCompare(b.movieTitle));
-        localStorage.setItem(localUsernameShelf, JSON.stringify(shelfList))*/
 
         await updateShelfContents(true, movieObj, movieObj.movieTitle, localShelfContent);
 
