@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const DB = require('./database.js');
 
 // The service port. In production the front-end code is statically hosted by the service on the same port.
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
@@ -26,13 +27,13 @@ apiRouter.get('/shelf/:username', (req, res) => {
 // updateShelf
 apiRouter.post('/shelf/:username', (req, res) => {
   const requestData = req.body;
-  let updatedLocalShelfContents = updateShelfContents(requestData, req.params.username);
+  let updatedLocalShelfContents = DB.updateShelfStats(requestData);
   res.send(updatedLocalShelfContents);
 })
 
 // get shelfStats
-apiRouter.get('/shelfStats/:username', (req, res) => {
-  const userShelfStats = getShelfStats(req.params.username);
+apiRouter.get('/shelfStats/:username', async (req, res) => {
+  const userShelfStats = await DB.getShelfStats(req.params.username);
   res.send(userShelfStats);
 });
 
@@ -53,7 +54,6 @@ app.listen(port, () => {
 });
 
 let shelfContents = new Map();
-let shelfStats = new Map();
 
 function getShelfContent(username) {
   let localShelfContent = shelfContents.get(username) || false;
@@ -64,38 +64,7 @@ function getShelfContent(username) {
   return localShelfContent;
 }
 
-function updateShelfContents(moviesArray, username) {
-  shelfContents.set(username, moviesArray);
-  return shelfContents.get(username);
-}
-
-function getShelfStats(username) {
-  if (!shelfStats.has(username)) {
-    shelfStats.set(username, {
-      "numberOfFilms": 0,
-      "numberOfPhysFilms": 0,
-      "numberOfDigFilms": 0
-    });
-  }
-
-  return shelfStats.get(username);
-}
-
-function updateShelfStats(newLocalShelfStats, username) {
-  const { numberOfFilms, numberOfPhysFilms, numberOfDigFilms } = newLocalShelfStats;
-
-  if (shelfStats.has(username)) {
-    const existingValues = shelfStats.get(username);
-    existingValues.numberOfFilms = numberOfFilms;
-    existingValues.numberOfPhysFilms = numberOfPhysFilms;
-    existingValues.numberOfDigFilms = numberOfDigFilms;
-  } else {
-    shelfStats.set(username, {
-      numberOfFilms,
-      numberOfPhysFilms,
-      numberOfDigFilms,
-    });
-  }
-
-  return shelfStats.get(username);
+function updateShelfStats(newLocalShelfStats) {
+  const result = DB.updateShelfStats(newLocalShelfStats)
+  return result;
 }

@@ -9,6 +9,7 @@ async function loadShelfStats() {
         
         if (localShelfStats === undefined) {
             localShelfStats = {
+                "username": localUsername,
                 "numberOfFilms": 0,
                 "numberOfPhysFilms": 0,
                 "numberOfDigFilms": 0,
@@ -23,6 +24,7 @@ async function loadShelfStats() {
 
         if (localShelfStats === false) {
             localShelfStats = {
+                "username": localUsername,
                 "numberOfFilms": 0,
                 "numberOfPhysFilms": 0,
                 "numberOfDigFilms": 0,
