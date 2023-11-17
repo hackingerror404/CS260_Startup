@@ -70,3 +70,9 @@ For this deliverable I added backend endpoints that receives changes made to use
 - **Calls to third party endpoints** - the search results on my *edit-shelf* page come from TMDB: The Movie DataBase. This allows you to add any movie on the database into your shelf.
 - **Backend service endpoints** - Placeholders for a user's shelf and shelfStats objects being stored in the database. Endpoints for receiving the shelf & shelfStats data, and endpoints for updating this data.
 - **Frontend calls service endpoints** - what the fetch broski (I used fetch to call my backend services).
+
+### DB deliverable
+For this deliverable I stored each user's individual shelfStats and shelfContent objects in the database.
+- **MongoDB Atlas database created** - done!
+- **Endpoints for data** - My stubbed out endpoints now process the data and send it to Mongo.
+- **Stores data in MongoDB** - done!
