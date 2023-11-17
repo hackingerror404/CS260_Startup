@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', async() => {
 
 function updateUserInfo() {
     let localUsername = localStorage.getItem("localLogin");
-    let localShelfStatsData = localStorage.getItem("shelfStats");
+    let localShelfStatsData = localStorage.getItem(localUsername + "_shelfStats");
     let localShelfStats = JSON.parse(localShelfStatsData);
 
     let numberOfFilms = document.getElementById("numberOfFilms");
@@ -22,8 +22,10 @@ function updateUserInfo() {
 }
 
 function updateShelfContents() {
-    let localShelfContentData = localStorage.getItem("shelf");
-    let localShelfContent = JSON.parse(localShelfContentData) || false;
+    let localUsername = localStorage.getItem("localLogin");
+    let localShelfContentData = localStorage.getItem(localUsername + "_shelf");
+    let localShelfContentWrapper = JSON.parse(localShelfContentData) || false;
+    let localShelfContent = localShelfContentWrapper.shelfContent;
     const userShelf = document.getElementById('#table-wrapper');
 
     userShelf.innerHTML = "";

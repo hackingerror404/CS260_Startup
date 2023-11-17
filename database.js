@@ -64,12 +64,48 @@ async function updateShelfStats(localShelfStats) {
   });
 }
 
-async function addShelfContent(username, localShelfContent) {
+async function updateShelfContent(localShelfContent) {
+  const query = { username: localShelfContent.username };
+  const update = {
+    $set: {
+      username: localShelfContent.username,
+      shelfContent: localShelfContent.shelfContent
+    }
+  };
 
+  const options = {
+    upsert: true,
+  };
+
+  try {
+    const result = await shelfCollection.updateOne(query, update, options);
+    return localShelfContent;
+  } catch {
+    console.error('Error updating/inserting user shelfContents:', err);
+    return null;
+  }
 }
 
-async function getShelfContent(username) {
+async function getShelfContent(usernameToFind) {
+  const query = { username: usernameToFind};
 
+  try {
+    const userShelfContent = await shelfCollection.findOne(query);
+    if (userShelfContent !== null) {
+      return userShelfContent;
+    } else {
+      const addShelfContent = {
+        username: usernameToFind,
+        shelfContent: []
+      };
+
+      const result = await shelfCollection.insertOne(addShelfContent);
+      return result.ops; // Return the inserted document(s)
+    }
+  } catch (err) {
+    console.error('Error finding/inserting user shelfContents:', err);
+    return null;
+  }
 }
 
-module.exports = { updateShelfStats, getShelfStats, addShelfContent, getShelfContent };
+module.exports = { updateShelfStats, getShelfStats, updateShelfContent, getShelfContent };

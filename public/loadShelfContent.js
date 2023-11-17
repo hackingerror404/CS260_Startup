@@ -16,11 +16,11 @@ async function loadShelfStats() {
             }
         }
         
-        localStorage.setItem("shelfStats", JSON.stringify(localShelfStats));
+        localStorage.setItem(localUsername + "_shelfStats", JSON.stringify(localShelfStats));
     } catch (error) {
         console.error('Error:', error);
 
-        let localShelfStats = JSON.parse(localStorage.getItem("shelfStats")) || false;
+        let localShelfStats = JSON.parse(localStorage.getItem(localUsername + "_shelfStats")) || false;
 
         if (localShelfStats === false) {
             localShelfStats = {
@@ -29,7 +29,7 @@ async function loadShelfStats() {
                 "numberOfPhysFilms": 0,
                 "numberOfDigFilms": 0,
             }
-            localStorage.setItem("shelfStats", JSON.stringify(localShelfStats));
+            localStorage.setItem(localUsername + "_shelfStats", JSON.stringify(localShelfStats));
         }
     }
 }
@@ -49,15 +49,15 @@ async function updateShelfStats(isAdding, movieObj, localShelfStats) {
             body: JSON.stringify(localShelfStats),
         });
     
-        const shelfStatsContent = await response.json();
+        const shelfStatsContent = response;
 
         if (!response.ok) throw new Error('Fetch failed');
 
-        localStorage.setItem("shelfStats", JSON.stringify(shelfStatsContent));
+        localStorage.setItem(localUsername + "_shelfStats", JSON.stringify(shelfStatsContent));
         
     } catch (error) {
         console.error('Fetch failed:', error);
-        localStorage.setItem("shelfStats", localShelfStats);
+        localStorage.setItem(localUsername + "_shelfStats", localShelfStats);
     }
 }
 
@@ -87,22 +87,25 @@ function removeItemFromShelfStats(movieObj, localShelfStats) {
 
 async function loadShelfContents() {
     let localUsername = localStorage.getItem("localLogin");
-    let localShelfContent = [];
+    let localShelfContent = new Object();
     try {
         let response = await fetch(`/api/shelf/${localUsername}`);
         if(!response.ok) throw new Error('Fetch failed');
         let data = await response.json();
         localShelfContent = data;
 
-        localStorage.setItem("shelf", JSON.stringify(localShelfContent));
+        localStorage.setItem(localUsername + "_shelf", JSON.stringify(localShelfContent));
     } catch (error) {
         console.error('Error:', error);
 
-        let localShelfContents = JSON.parse(localStorage.getItem("shelf")) || false;
+        let localShelfContents = JSON.parse(localStorage.getItem(localUsername + "_shelf")) || false;
 
         if (localShelfContents === false) {
-            localShelfContents = [];
-            localStorage.setItem("shelf", JSON.stringify(loadShelfContents));
+            localShelfContents = {
+                "username": localUsername,
+                shelfContent: []
+            };
+            localStorage.setItem(localUsername + "_shelf", JSON.stringify(localShelfContents));
         }
     }    
 }
@@ -127,25 +130,29 @@ async function updateShelfContents(isAdding, movieObj, movieTitle, localShelfCon
 
         if (!response.ok) throw new Error('Fetch failed');
 
-        localStorage.setItem("shelf", shelfContentResponse);
+        localStorage.setItem(localUsername + "_shelf", shelfContentResponse);
     } catch (error) {
         console.error('loadShelfContent fetch failed:', error);
-        localStorage.setItem("shelf", JSON.stringify(localShelfContent));
+        localStorage.setItem(localUsername + "_shelf", JSON.stringify(localShelfContent));
     }
 }
 
 function addItemToShelf(movieObj, localShelfContent) {
-    localShelfContent.push(movieObj);
-    localShelfContent.sort((a, b) => a.movieTitle.localeCompare(b.movieTitle));
-    localStorage.setItem("shelf", JSON.stringify(localShelfContent));
+    let localUsername = localStorage.getItem("localLogin");
+
+    localShelfContent.shelfContent.push(movieObj);
+    localShelfContent.shelfContent.sort((a, b) => a.movieTitle.localeCompare(b.movieTitle));
+    localStorage.setItem(localUsername + "_shelf", JSON.stringify(localShelfContent));
 
     return localShelfContent;
 }
 
 function removeItemFromShelf(movieTitle, localShelfContent) {
-    localShelfContent = localShelfContent.filter(obj => obj.movieTitle !== movieTitle);
-    localShelfContent.sort((a, b) => a.movieTitle.localeCompare(b.movieTitle));
-    localStorage.setItem("shelf", JSON.stringify(loadShelfContents));
+    let localUsername = localStorage.getItem("localLogin");
+
+    localShelfContent.shelfContent = localShelfContent.shelfContent.filter(obj => obj.movieTitle !== movieTitle);
+    localShelfContent.shelfContent.sort((a, b) => a.movieTitle.localeCompare(b.movieTitle));
+    localStorage.setItem(localUsername + "_shelf", JSON.stringify(loadShelfContents));
 
     return localShelfContent;
 }

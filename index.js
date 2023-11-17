@@ -19,16 +19,16 @@ var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
 // getShelf
-apiRouter.get('/shelf/:username', (req, res) => {
-  const userShelfContent = getShelfContent(req.params.username);
+apiRouter.get('/shelf/:username', async (req, res) => {
+  const userShelfContent = await DB.getShelfContent(req.params.username);
   res.send(userShelfContent);
 });
 
 // updateShelf
-apiRouter.post('/shelf/:username', (req, res) => {
+apiRouter.post('/shelf/:username', async (req, res) => {
   const requestData = req.body;
-  let updatedLocalShelfContents = DB.updateShelfStats(requestData);
-  res.send(updatedLocalShelfContents);
+  let updatedLocalShelfContents = await DB.updateShelfContent(requestData);
+  res.send(updatedLocalShelfContents.shelfContent);
 })
 
 // get shelfStats
@@ -38,9 +38,9 @@ apiRouter.get('/shelfStats/:username', async (req, res) => {
 });
 
 // update shelfStats
-apiRouter.post('/shelfStats/:username', (req, res) => {
+apiRouter.post('/shelfStats/:username', async (req, res) => {
   const requestData = req.body;
-  let updatedLocalShelfStats = updateShelfStats(requestData, req.params.username);
+  let updatedLocalShelfStats = await DB.updateShelfStats(requestData);
   res.send(updatedLocalShelfStats);
 });
 

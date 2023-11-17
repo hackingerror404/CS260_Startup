@@ -103,10 +103,10 @@ function initButtons() {
     deleteButton.setAttribute('disabled', true);
 
     let localUsername = localStorage.getItem("localLogin");
-    let localShelfContentData = localStorage.getItem("shelf");
+    let localShelfContentData = localStorage.getItem(localUsername + "_shelf");
     let localShelfContent = JSON.parse(localShelfContentData);
 
-    let localShelfStatsData = localStorage.getItem("shelfStats");
+    let localShelfStatsData = localStorage.getItem(localUsername + "_shelfStats");
     let localShelfStats = JSON.parse(localShelfStatsData);
     
     addButton.addEventListener('click', async function() {
@@ -121,7 +121,7 @@ function initButtons() {
 
     deleteButton.addEventListener('click', async function() {
         const searchBox = document.getElementById('movie-name');
-        const movieObj = localShelfContent.find(obj => obj.movieTitle === searchBox.value) || false;
+        const movieObj = localShelfContent.shelfContent.find(obj => obj.movieTitle === searchBox.value) || false;
 
         if (movieObj === false) {
             alert("Please select a movie in your collection!");
