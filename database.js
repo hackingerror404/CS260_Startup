@@ -1,8 +1,11 @@
 const { MongoClient } = require('mongodb');
+const bcrypt = require('bcrypt');
+const uuid = require('uuid');
 const config = require('./dbConfig.json');
 const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
 const client = new MongoClient(url);
 const db = client.db('rental');
+const userCollection = db.collection('user');
 const shelfStatsCollection = db.collection('shelfStats');
 const shelfCollection = db.collection('shelf');
 
@@ -14,6 +17,28 @@ const shelfCollection = db.collection('shelf');
   console.log(`Unable to connect to database with ${url} because ${ex.message}`);
   process.exit(1);
 });
+
+function getUser(username) {
+  return userCollection.findOne({ username: username });
+}
+
+function getUserByToken(token) {
+  return userCollection.findOne({ token: token });
+}
+
+async function createUser(username, password) {
+  // Hash the password before we insert it into the database
+  const passwordHash = await bcrypt.hash(password, 10);
+
+  const user = {
+    username: username,
+    password: passwordHash,
+    token: uuid.v4(),
+  };
+  await userCollection.insertOne(user);
+
+  return user;
+}
 
 async function getShelfStats(usernameToFind) {
   const query = { username: usernameToFind };
@@ -108,4 +133,5 @@ async function getShelfContent(usernameToFind) {
   }
 }
 
-module.exports = { updateShelfStats, getShelfStats, updateShelfContent, getShelfContent };
+module.exports = { getUser, getUserByToken, createUser,
+  updateShelfStats, getShelfStats, updateShelfContent, getShelfContent };
