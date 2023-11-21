@@ -7,7 +7,12 @@ window.onload = fillInUsername;
 async function fillInUsername() {
     const username = localStorage.getItem('localLogin');
     if (username) {
-        document.getElementById("username").value = username;
+        setDisplay('notLoggedInControls', 'none');
+        setDisplay('loggedInControls', 'flex');
+        document.querySelector("#loggedInControls input#username").value = username;
+    } else {
+        setDisplay('notLoggedInControls', 'flex');
+        setDisplay('loggedInControls', 'none');
     }
 }
 
@@ -115,3 +120,10 @@ function register() {
 
     createUser();
 }
+
+function setDisplay(controlId, display) {
+    const playControlEl = document.querySelector(`#${controlId}`);
+    if (playControlEl) {
+      playControlEl.style.display = display;
+    }
+  }
