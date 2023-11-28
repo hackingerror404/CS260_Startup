@@ -18,10 +18,13 @@ function updateUserInfo() {
     let shelfUsername = document.getElementById("home-username");
     shelfUsername.innerHTML = `<a href="shelf.html">${localUsername}</a>`;
 
-    generateActivity();
+    let chatText = document.querySelector('.live-activity-feed-subdivision');
+    if (localUsername == "" || localUsername == null) {
+        chatText.innerHTML = "";
+    }
 }
 
-const movieTitles = ["Arrival", "Back to the Future", "The Batman", "Batman Begins", "Birdman", "Black Swan",
+/*const movieTitles = ["Arrival", "Back to the Future", "The Batman", "Batman Begins", "Birdman", "Black Swan",
         "Blade Runner 2049", "The Breadwinner", "Casablanca", "Casino Royale", "Castle in the Sky", "The Cat Returns",
         "The Dark Knight", "Despicable Me", "Django Unchained", "Do the Right Thing", "Dune", 
         "Everything Everywhere All at Once", "The Fablemans", "Fantastic Mr Fox", "Get Out"];
@@ -69,4 +72,4 @@ function generateActivity() {
 
 setInterval(() => {
     generateActivity();
-  }, 3000);
+  }, 3000);*/
