@@ -76,3 +76,10 @@ For this deliverable I stored each user's individual shelfStats and shelfContent
 - **MongoDB Atlas database created** - done!
 - **Endpoints for data** - My stubbed out endpoints now process the data and send it to Mongo.
 - **Stores data in MongoDB** - done!
+
+### Login Deliverable
+For this deliverable I associate the shelfContents and shelfStats objects with the logged in user.
+- **User registration** - Creates a new account in the database.
+- **Existing user** - Stores the shelfContents and shelfStats under the same user if the user already exists.
+- **Use MongoDB to store credentials** - Stores user, their shelfContents, and their shelfStats.
+- **Restricts functionality** - You cannot edit a shelf until you have logged in.
