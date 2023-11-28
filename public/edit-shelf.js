@@ -116,6 +116,8 @@ function initButtons() {
 
         await updateShelfStats(true, movieObj, localShelfStats);
 
+        sendMessage(localUsername, movieObj);
+
         window.location.href = "shelf.html";
     });
 
@@ -129,6 +131,8 @@ function initButtons() {
             await updateShelfContents(false, movieObj, searchBox.value, localShelfContent);
 
             await updateShelfStats(false, movieObj, localShelfStats);
+
+            await sendMessage(localUsername, movieObj);
 
             window.location.href = "shelf.html";
         }
@@ -161,6 +165,69 @@ function createMovieObj() {
     return movieToAdd;
 }
 
+async function sendMessage(localUsername, movieObj, isAdded) {
+    const myWebSocket = configWebSocket();
+
+    let actionString = "";
+
+    if (isAdded) {
+        actionString = "added";
+    } else {
+        actionString = "removed";
+    }
+
+    if (movieObj.isDVD) {
+        const message = {
+            type: 'chat',
+            content: `${localUsername} ${actionString} ${movieObj.movieTitle} on DVD`
+        }
+        myWebSocket.send(JSON.stringify(message));
+    }
+    if (movieObj.isBluRay) {
+        const message = {
+            type: 'chat',
+            content: `${localUsername} ${actionString} ${movieObj.movieTitle} on Blu-Ray`
+        }
+        myWebSocket.send(JSON.stringify(message));
+    }
+    if (movieObj.is4KBluRay) {
+        const message = {
+            type: 'chat',
+            content: `${localUsername} ${actionString} ${movieObj.movieTitle} on 4K Blu-Ray`
+        }
+        myWebSocket.send(JSON.stringify(message));
+    }
+    if (movieObj.isMoviesAnywhere) {
+        const message = {
+            type: 'chat',
+            content: `${localUsername} ${actionString} ${movieObj.movieTitle} on Movies Anywhere`
+        }
+        myWebSocket.send(JSON.stringify(message));
+    }
+    if (movieObj.isVUDU) {
+        const message = {
+            type: 'chat',
+            content: `${localUsername} ${actionString} ${movieObj.movieTitle} on VUDU`
+        }
+        myWebSocket.send(JSON.stringify(message));
+    }
+    if (movieObj.isAppleTV) {
+        const message = {
+            type: 'chat',
+            content: `${localUsername} ${actionString} ${movieObj.movieTitle} on iTunes`
+        }
+        myWebSocket.send(JSON.stringify(message));
+    }
+    if (movieObj.isPrimeVideo) {
+        const message = {
+            type: 'chat',
+            content: `${localUsername} ${actionString} ${movieObj.movieTitle} on Prime Video`
+        }
+        myWebSocket.send(JSON.stringify(message));
+    }
+    myWebSocket.close();
+}
+
 function checkIfPhysical() {
     return atLeastOneCheckbox(`id="dvd"`) || atLeastOneCheckbox(`id="bluray"`) || atLeastOneCheckbox(`id="4k_bluray"`);
 }
@@ -177,4 +244,19 @@ function initCheckboxes() {
             checkButtonConditions();
         });
     }
+}
+
+function configWebSocket() {
+    let localUsername = localStorage.getItem("localLogin");
+    if (localUsername != "" && localUsername != null) {
+        const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
+        const socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
+    
+        // Display that we have opened the webSocket
+        socket.onopen = (event) => {
+            console.log("Connection opened!");
+        };
+    }
+
+    return socket;
 }

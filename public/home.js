@@ -21,19 +21,17 @@ function updateUserInfo() {
     let chatText = document.querySelector('.live-activity-feed-subdivision');
     if (localUsername == "" || localUsername == null) {
         chatText.innerHTML = "";
+    } else {
+        // generateActivity();
     }
 }
 
-/*const movieTitles = ["Arrival", "Back to the Future", "The Batman", "Batman Begins", "Birdman", "Black Swan",
-        "Blade Runner 2049", "The Breadwinner", "Casablanca", "Casino Royale", "Castle in the Sky", "The Cat Returns",
-        "The Dark Knight", "Despicable Me", "Django Unchained", "Do the Right Thing", "Dune", 
-        "Everything Everywhere All at Once", "The Fablemans", "Fantastic Mr Fox", "Get Out"];
-const usernames = ["CyberNinja42", "PixelPioneer", "CodeWarriorX", "DigitalExplorer", "TechWhiz123", "ByteMaster99",
-        "WebWizard23", "GameGuru77", "VirtualVoyager", "DataDynamo88"];
-const formats = ["DVD", "Blu-Ray", "4K Blu-Ray", "Movies Anywhere", "VUDU", "Apple TV", "Prime Video"];
-const decisions = ["added", "removed"];
+function appendMsg(cls, from, msg) {
+    const chatText = document.querySelector('.live-activity-feed-subdivision');
+    let divChildren = chatText.querySelectorAll('p').length; 
+}
 
-function selectRandArrayEl(stringArray) {
+/*function selectRandArrayEl(stringArray) {
     let randomIndex = Math.floor(Math.random() * stringArray.length);
     return stringArray[randomIndex];
 }
