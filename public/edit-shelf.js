@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', async function() {
+    //await configureWebSocket();
     await loadShelfStats();
     await loadShelfContents();
     initSearchBox();
@@ -7,6 +8,19 @@ document.addEventListener('DOMContentLoaded', async function() {
 });
 
 let movieTitleSelected = false;
+let socket = configureWebSocket();
+
+function configureWebSocket() {
+    const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
+    const socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
+
+    // Display that we have opened the webSocket
+    socket.onopen = (event) => {
+        console.log("Connection opened!");
+    };
+
+    return socket;
+}
 
 function initSearchBox() {
     const searchBox = document.getElementById('movie-name');
@@ -116,7 +130,7 @@ function initButtons() {
 
         await updateShelfStats(true, movieObj, localShelfStats);
 
-        sendMessage(localUsername, movieObj);
+        await sendMessage(localUsername, movieObj);
 
         window.location.href = "shelf.html";
     });
@@ -166,8 +180,6 @@ function createMovieObj() {
 }
 
 async function sendMessage(localUsername, movieObj, isAdded) {
-    const myWebSocket = configWebSocket();
-
     let actionString = "";
 
     if (isAdded) {
@@ -179,53 +191,53 @@ async function sendMessage(localUsername, movieObj, isAdded) {
     if (movieObj.isDVD) {
         const message = {
             type: 'chat',
-            content: `${localUsername} ${actionString} ${movieObj.movieTitle} on DVD`
+            content: `${localUsername} ${actionString} ${movieObj.movieTitle} on DVD.`
         }
-        myWebSocket.send(JSON.stringify(message));
+        socket.send(JSON.stringify(message));
     }
     if (movieObj.isBluRay) {
         const message = {
             type: 'chat',
-            content: `${localUsername} ${actionString} ${movieObj.movieTitle} on Blu-Ray`
+            content: `${localUsername} ${actionString} ${movieObj.movieTitle} on Blu-Ray.`
         }
-        myWebSocket.send(JSON.stringify(message));
+        socket.send(JSON.stringify(message));
     }
     if (movieObj.is4KBluRay) {
         const message = {
             type: 'chat',
-            content: `${localUsername} ${actionString} ${movieObj.movieTitle} on 4K Blu-Ray`
+            content: `${localUsername} ${actionString} ${movieObj.movieTitle} on 4K Blu-Ray.`
         }
-        myWebSocket.send(JSON.stringify(message));
+        socket.send(JSON.stringify(message));
     }
     if (movieObj.isMoviesAnywhere) {
         const message = {
             type: 'chat',
-            content: `${localUsername} ${actionString} ${movieObj.movieTitle} on Movies Anywhere`
+            content: `${localUsername} ${actionString} ${movieObj.movieTitle} on Movies Anywhere.`
         }
-        myWebSocket.send(JSON.stringify(message));
+        socket.send(JSON.stringify(message));
     }
     if (movieObj.isVUDU) {
         const message = {
             type: 'chat',
-            content: `${localUsername} ${actionString} ${movieObj.movieTitle} on VUDU`
+            content: `${localUsername} ${actionString} ${movieObj.movieTitle} on VUDU.`
         }
-        myWebSocket.send(JSON.stringify(message));
+        socket.send(JSON.stringify(message));
     }
     if (movieObj.isAppleTV) {
         const message = {
             type: 'chat',
-            content: `${localUsername} ${actionString} ${movieObj.movieTitle} on iTunes`
+            content: `${localUsername} ${actionString} ${movieObj.movieTitle} on iTunes.`
         }
-        myWebSocket.send(JSON.stringify(message));
+        socket.send(JSON.stringify(message));
     }
     if (movieObj.isPrimeVideo) {
         const message = {
             type: 'chat',
-            content: `${localUsername} ${actionString} ${movieObj.movieTitle} on Prime Video`
+            content: `${localUsername} ${actionString} ${movieObj.movieTitle} on Prime Video.`
         }
-        myWebSocket.send(JSON.stringify(message));
+        socket.send(JSON.stringify(message));
     }
-    myWebSocket.close();
+    socket.close();
 }
 
 function checkIfPhysical() {
@@ -244,19 +256,4 @@ function initCheckboxes() {
             checkButtonConditions();
         });
     }
-}
-
-function configWebSocket() {
-    let localUsername = localStorage.getItem("localLogin");
-    if (localUsername != "" && localUsername != null) {
-        const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
-        const socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
-    
-        // Display that we have opened the webSocket
-        socket.onopen = (event) => {
-            console.log("Connection opened!");
-        };
-    }
-
-    return socket;
 }
