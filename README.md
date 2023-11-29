@@ -83,3 +83,10 @@ For this deliverable I associate the shelfContents and shelfStats objects with t
 - **Existing user** - Stores the shelfContents and shelfStats under the same user if the user already exists.
 - **Use MongoDB to store credentials** - Stores user, their shelfContents, and their shelfStats.
 - **Restricts functionality** - You cannot edit a shelf until you have logged in.
+
+### WebSocket Deliverable
+For this deliverable I used webSocket to update users' additions and removals to their shelf in real time, viewable on the home page.  
+- **Backend listens for WebSocket connection** - done!
+- **Frontend makes WebSocket connection** - done!
+- **Data sent over WebSocket connection** - done!
+- **WebSocket data displayed** - User additions and removals to their shelf display in real time, viewable on the home page.  
