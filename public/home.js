@@ -24,11 +24,6 @@ function updateUserInfo() {
     }
 }
 
-/*function selectRandArrayEl(stringArray) {
-    let randomIndex = Math.floor(Math.random() * stringArray.length);
-    return stringArray[randomIndex];
-}*/
-
 let socket = configureWebSocket();
 
 function configureWebSocket() {

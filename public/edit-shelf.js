@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', async function() {
-    //await configureWebSocket();
     await loadShelfStats();
     await loadShelfContents();
     initSearchBox();

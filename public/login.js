@@ -39,12 +39,6 @@ async function loginOrCreate(endpoint) {
         localStorage.setItem('localLogin', usernamePossible);
         window.location.href = 'home.html';
     } else {
-        /*const body = await response.json();
-        const modalEl = document.querySelector('#msgModal');
-        modalEl.querySelector('.modal-body').textContent = `⚠ Error: ${body.msg}`;
-        const msgModal = new bootstrap.Modal(modalEl, {});
-        msgModal.show();*/
-
         alert("Incorrect username or password!");
     }
 }
@@ -73,21 +67,6 @@ function login() {
         return;
     }
 
-    /*
-    let loginInfo = JSON.parse(localStorage.getItem('loginInfo')) || [];
-
-    const usernamePossible = document.getElementById("username");
-    const passwordPossible = document.getElementById("password");
-
-    for (let li of loginInfo) {
-        if (li.username === usernamePossible.value && li.password === passwordPossible.value) {
-            localStorage.setItem("localLogin", usernamePossible.value);
-            window.location.href = "home.html";
-        }
-    }
-
-    alert("Incorrect username or password!");*/
-
     loginUser();
 }
 
@@ -103,21 +82,6 @@ function register() {
         alert("Please select a password!");
         return;
     }
-
-    /*let loginInfo = JSON.parse(localStorage.getItem('loginInfo')) || [];
-
-    for (let li of loginInfo) {
-        if (li.username === usernameEl.value) {
-            alert("Username already taken! Please select a new one.");
-            return;
-        }
-    }
-
-    loginInfo.push({username: usernameEl.value, password: passwordEl.value});
-    localStorage.setItem("loginInfo", JSON.stringify(loginInfo));
-    localStorage.setItem("localLogin", usernameEl.value);
-    window.location.href = "home.html";*/
-
     createUser();
 }
 
