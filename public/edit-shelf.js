@@ -129,7 +129,7 @@ function initButtons() {
 
         await updateShelfStats(true, movieObj, localShelfStats);
 
-        await sendMessage(localUsername, movieObj);
+        await sendMessage(localUsername, movieObj, true);
 
         window.location.href = "shelf.html";
     });
@@ -145,7 +145,7 @@ function initButtons() {
 
             await updateShelfStats(false, movieObj, localShelfStats);
 
-            await sendMessage(localUsername, movieObj);
+            await sendMessage(localUsername, movieObj, false);
 
             window.location.href = "shelf.html";
         }
