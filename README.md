@@ -89,4 +89,7 @@ For this deliverable I used webSocket to update users' additions and removals to
 - **Backend listens for WebSocket connection** - done!
 - **Frontend makes WebSocket connection** - done!
 - **Data sent over WebSocket connection** - done!
-- **WebSocket data displayed** - User additions and removals to their shelf display in real time, viewable on the home page.  
+- **WebSocket data displayed** - User additions and removals to their shelf display in real time, viewable on the home page.
+
+### React Deliverable
+I did not finish this deliverable. I had to stop halfway in the process of converting it to a React page thanks to the due date. I have not deployed it because of this, but you can see in the most recently pushed version of my code that I made it part of the way. Much of my changes were in the file structure, new jsx files, etc. Hopefully I could get at least a teensy bit of partial credit, if only for the Git Commits maybe?
