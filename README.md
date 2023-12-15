@@ -92,4 +92,4 @@ For this deliverable I used webSocket to update users' additions and removals to
 - **WebSocket data displayed** - User additions and removals to their shelf display in real time, viewable on the home page.
 
 ### React Deliverable
-I did not finish this deliverable. I had to stop halfway in the process of converting it to a React page thanks to the due date. Much of my changes were in the file structure, new jsx files, etc.
+I did not finish this deliverable. I had to stop halfway in the process of converting it to a React page thanks to the due date. None of the results deployed (thanks to an error?), but my code is visible on my GitHub. Much of my changes were in the file structure, new jsx files, etc. App.jsx and index.jsx were the biggest additions.
