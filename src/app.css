@@ -1,0 +1,114 @@
+  .body {
+    display: flex;
+    flex-direction: column;
+    min-width: 250px;
+    font-family: sans-serif;
+    background-color: #363636;
+    color: white;
+    height: 100%;
+  }
+  
+  header {
+      padding: 0.5em;
+      font-size: 5vw;
+      text-align: center;
+      /*background-color: black;*/
+      border: solid white thin;
+  
+      background-color: #000000;
+      opacity: 1;
+      background: linear-gradient(135deg, #000dff55 25%, transparent 25%) -24px 0/ 48px 48px, linear-gradient(225deg, #000dff 25%, transparent 25%) -24px 0/ 48px 48px, linear-gradient(315deg, #000dff55 25%, transparent 25%) 0px 0/ 48px 48px, linear-gradient(45deg, #000dff 25%, #000000 25%) 0px 0/ 48px 48px;
+  }
+  
+  header h3 {
+      font-style:italic;
+      animation-name: tagline;
+      animation-duration: 2s;
+  }
+  
+  main {
+      padding: 0.5em;
+      font-size: 20px;
+      text-align: center;
+  }
+  
+  #bootstrap-overrides div div {
+      display: flex;
+      background-color: #363636;
+      color: white;
+      border: none;
+      text-align: center;
+      justify-content: center;
+      align-items: center;
+  }
+  
+  #bootstrap-overrides div div div {
+      padding: 0.25em;
+  }
+  
+  #username {
+      flex: 1 10px;
+  }
+  
+  #username-label {
+      flex: 1 10px;
+  }
+  
+  #password {
+      flex: 1 10px;
+  }
+  
+  #password-label {
+      flex: 1 10px;
+  }
+  
+  #login-button {
+      width: 45%;
+  }
+  
+  #signup-button {
+      width: 45%;
+  }
+  
+  img {
+      max-width: 50%;
+      height: auto;
+      border-radius: 2%;
+  }
+  
+  footer {
+      padding: 0.25em;
+      margin: 0.5em;
+      /*background-color: black;*/
+      text-align: right;
+      border: dashed thin white;
+      font-style: italic;
+  
+      
+  }
+  
+  @media (max-height: 700px) {
+      img {
+          display: none;
+      }
+      footer {
+          display: none;
+      }
+  }
+  
+  @media (orientation: portrait) {
+      footer {
+          position: absolute;
+          bottom: 0;
+          width: 95%;
+      }
+  }
+  
+  @keyframes tagline {
+      0% {
+          transform: translateX(-100%);
+      }
+      100% {
+          transform: translateX(0);
+      }
+  }
