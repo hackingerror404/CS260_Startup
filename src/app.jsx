@@ -12,15 +12,23 @@ export default function App() {
             </div>
 
             <div className="links-container">
-                <a href="index.html">Login</a>
-                <a href="home.html">Home</a>
-                <a href="shelf.html">Your Shelf</a>
-                <a href="edit-shelf.html">Edit Shelf</a>
+                <NavLink className="nav-link" to="">Login</NavLink>
+                <NavLink className="nav-link" to="home">Home</NavLink>
+                <NavLink className="nav-link" to="shelf">Your Shelf</NavLink>
+                <NavLink className="nav-link" to="edit-shelf">Edit Shelf</NavLink>
             </div>
         </div>
       </header>
 
       <main>App components go here</main>
+
+      <Routes>
+        <Route path='/' element={<Login />} exact />
+        <Route path='/home' element={<Home />} />
+        <Route path='/shelf' element={<Shelf />} />
+        <Route path='/edit-shelf' element={<Edit-Shelf />} />
+        <Route path='*' element={<NotFound />} />
+      </Routes>
 
       <footer>
         <span className="text-reset">Jayden Hacking</span>
@@ -29,4 +37,8 @@ export default function App() {
       </footer>
     </div>
   );
+}
+
+function NotFound() {
+  return <main className='container-fluid bg-secondary text-center'>404: Return to sender. Address unknown.</main>;
 }

@@ -1,9 +1,9 @@
 import React from 'react';
 
-export function Login() {
+export function EditShelf() {
   return (
     <main className='container-fluid bg-secondary text-center'>
-      <div>shelf displayed here</div>
+      <div>edit-shelf displayed here</div>
     </main>
   );
 }
