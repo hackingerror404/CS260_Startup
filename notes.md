@@ -198,3 +198,236 @@ A record example: `subdomain.example.com   IN   A   anotherdomain.com`
 22: SSH Protocol. Port 22 is used for secure remote access and file transfer via SSH. It provides an encrypted connection for secure access to a remote system's command-line interface.  
 - What will the following code using Promises output when executed?
 resolve called if successful, reject called if fails. .then handles resolved case, .catch handles the fai case.
+
+# FINAL EXAM QUESTIONS
+
+### What ports are used for HTTP, HTTPS, SSH?
+HTTP (Hypertext Transfer Protocol): Default Port: 80
+HTTPS (Hypertext Transfer Protocol Secure): Default Port: 443
+SSH (Secure Shell): Default Port: 22
+
+### What do HTTP status codes in the 300, 400, 500 range indicate?
+HTTP status codes are three-digit numbers returned by a server in response to a request made by a client (e.g., a web browser or an API client). The first digit of the status code defines the class of response, while the last two digits do not have any categorization role.  
+3xx (Redirection): Status codes in the 300 range indicate redirection. For example:
+        300 Multiple Choices
+        301 Moved Permanently
+        302 Found
+        304 Not Modified (commonly used in caching)
+4xx (Client Error): Status codes in the 400 range indicate client errors. These codes are typically returned when the client has made an error in the request. For example:
+        400 Bad Request
+        401 Unauthorized
+        403 Forbidden
+        404 Not Found
+5xx (Server Error): Status codes in the 500 range indicate server errors. These codes are returned when the server encounters an error while trying to fulfill the request. For example:
+        500 Internal Server Error
+        502 Bad Gateway
+        503 Service Unavailable
+        504 Gateway Timeout      
+
+### What does the HTTP header content-type allows you to do?
+The Content-Type HTTP header is used to indicate the media type or MIME (Multipurpose Internet Mail Extensions) type of the resource sent in the HTTP message body. It specifies the type of data contained in the body of the request or response, allowing the recipient to properly interpret and process the content. SPECIFY TYPE OF DATA. `text/plain`, `application/json`, `multipart/form-data`.
+
+### What do the following attributes of a cookie do? (Domain, Path, SameSite, HTTPOnly)
+- **Domain**: specifies the domain for which the cookie is valid. The browser will include the cookie in the request headers only if the domain of the request matches the specified domain.
+- **Path**: indicates the URL path for which the cookie is valid.
+- **SameSite**: used to control whether a cookie should be sent with cross-site requests. It helps prevent cross-site request forgery attacks. Strict, Lax, and None are the possible values.
+- **HTTPOnly**: a security measure that, when set, prevents JavaScript from accessing the cookie. If a cookie is marked as HttpOnly, it can only be accessed and modified by the server, not by client-side scripts.
+
+### Assuming the following Express middleware, what would be the console.log output for an HTTP GET request with a URL path of /foo/bar?
+GET Requests usually have a response formatted like this:
+```
+{
+  content: 'Never put off till tomorrow what you can do today.',
+  author: 'Thomas Jefferson',
+};
+```
+`res.send({ stuff here })` is where these will live in an Express middlware solution.  
+Example of middleware code:
+```
+const cookieParser = require('cookie-parser');
+app.use(cookieParser());
+
+app.post('/cookie/:name/:value', (req, res, next) => {
+  res.cookie(req.params.name, req.params.value);
+  res.send({cookie: `${req.params.name}:${req.params.value}`});
+});
+
+app.get('/cookie', (req, res, next) => {
+  res.send({cookie: req.cookies});
+});
+```
+
+### Given the following Express service code: What does the following JavaScript fetch return?
+Here is an example of fetch code. Don't know what else to put here lol. 
+```
+fetch('https://api.quotable.io/random')
+  .then((response) => response.json())
+  .then((jsonResponse) => {
+    console.log(jsonResponse);
+  });
+```
+
+### Given the following MongoDB query `{ cost: { $gt: 10 }, name: /fran.*/}`  select all of the matching documents.
+The MongoDB query provided is filtering documents based on two conditions: cost field must be greater than 10, and name field must match the regular expression `/fran.*/`.  
+This query will retrieve all documents in the collection where the cost is greater than 10 and the name matches the regular expression /fran.*/.  
+
+### How should you store user passwords in a database?
+So instead of storing the password directly, we want to cryptographically hash the password so that we never store the actual password. When we want to validate a password during login, we can hash the login password and compare it to our stored hash of the password.
+
+### Assuming the following Node.js service code is executing with websockets, what will be logged to the console of the web browser?
+
+### What is the WebSocket protocol used for?
+The WebSocket protocol is a communication protocol that provides full-duplex communication channels over a single, long-lived connection.  
+The core feature of WebSocket is that it is fully duplexed. This means that after the initial connection is made from a client, using vanilla HTTP, and then upgraded by the server to a WebSocket connection, the relationship changes to a peer-to-peer connection where either party can efficiently send data at any time.
+
+### What is JSX and how are the curly braces rendered?
+JSX (JavaScript XML) is a syntax extension for JavaScript recommended by React for describing what the UI should look like. It looks similar to XML or HTML but is designed to work with JavaScript.  
+Example:
+```
+const name = "John";
+const element = <p>Hello, {name}!</p>;
+```
+"name" is inserted in. Any Java expression can be inserted in without issues.
+
+### Assuming a HTML document with a `<div id="root"></div>` element, what content will the following React component generate?
+Content:
+```
+function Welcome(props) {
+  return <h1>Hello, {props.name}</h1>;
+}
+function App() {
+  return (
+    <div>
+      <Welcome name="Sara" />
+      <Welcome name="Cahal" />
+      <Welcome name="Edite" />
+    </div>
+  );
+}
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App />);
+```
+
+Answer:
+```
+<div>
+  <h1>Hello, Sara</h1>
+  <h1>Hello, Cahal</h1>
+  <h1>Hello, Edite</h1>
+</div>
+```
+
+### Assuming a HTML document with a `<div id="root"></div>` element, element, what content will the following React component generate?
+Content:
+```
+function Numbers() { 
+  const numbers = [1, 2, 3, 4, 5];
+  const listItems = numbers.map((number) =>
+    <li>{number}</li>
+  );
+  return(<ul>{listItems}</ul>)
+}
+const root = ReactDOM.createRoot(document.getElementById('root')); 
+root.render(<Numbers/>);
+```
+Answer:
+```
+<ul>
+  <li>1</li>
+  <li>2</li>
+  <li>3</li>
+  <li>4</li>
+  <li>5</li>
+</ul>
+```
+
+### What does the following React component do? 
+Component:
+```
+function Example() {
+  // Declare a new state variable, which we'll call "count"  
+  const [count, setCount] = useState(0);
+  return (
+    <div>
+      <p>You clicked {count} times</p>
+      <button onClick={() => setCount(count + 1)}>
+        Click me
+      </button>
+    </div>
+  );
+}
+```
+**State Declaration**: `const [count, setCount] = useState(0);`
+This line declares a state variable named count using the useState hook. The initial value of count is set to 0, and setCount is a function that can be used to update the value of count.  
+
+**Rendered Output**: 
+- The component renders a <div> containing a <p> element and a <button> element.
+- The <p> element displays the current value of the count state variable using curly braces {count}.
+- The <button> element has an onClick event handler that calls the setCount function to increment the count state by 1 whenever the button is clicked.
+
+**Behavior**:
+When the button is clicked, the setCount function is invoked with the current value of count plus 1, updating the state. This triggers a re-render of the component with the updated state value.  
+As a result, the displayed count in the paragraph (<p>) element will increase by 1 each time the button is clicked.  
+
+### What are React Hooks used for?
+React Hooks are functions that enable functional components to use state, lifecycle methods, and other React features that were traditionally only available in class components. useState, useEffect, etc.  
+React Hooks simplify the development of React components by allowing functional components to manage state and side effects more easily.  
+
+### What is the useEffect hook used for?
+The useEffect hook in React is used to perform side effects in functional components. Side effects may include data fetching, subscriptions, manual DOM manipulations, and other tasks that need to be performed after the component has rendered. The useEffect hook helps manage these side effects in a way that aligns with the component lifecycle. REPRESENTS LIFECYCLE EVENTS.
+```
+useEffect(() => {
+  // Side effect code here
+  // This code runs after the component renders
+
+  return () => {
+    // Cleanup code (optional)
+    // This code runs before the component is unmounted or before the effect is re-run
+  };
+}, [dependencies]);
+```
+
+### What does this code do? 
+Code:
+```
+export default function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="blogs" element={<Blogs />} />
+          <Route path="contact" element={<Contact />} />
+          <Route path="*" element={<NoPage />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  );
+}
+```
+The provided code is a React component using the React Router library for navigation.  
+- **BrowserRouter**: This component from react-router-dom provides the routing infrastructure for the application.  
+- **Routes**: The Routes component is used to declare the routes for your application. It is the container for individual Route components.  
+- The outermost Route has a path="/", meaning it will match the root path. It renders a Layout component.  
+- Index Route (<Route index>): `<Route index element={<Home />} />`. This matches the root path ("/") and renders the Home component inside the Layout.  
+- `<Route path="blogs" element={<Blogs />} /> <Route path="contact" element={<Contact />} />`. These routes match specific paths ("/blogs" and "/contact") and render corresponding components (Blogs and Contact) inside the Layout.
+- **Wildcard Route**: This is a catch-all route that matches any path not covered by the previous routes. It renders the NoPage component inside the Layout.
+
+In summary, this React component sets up a basic navigation structure using React Router. It defines routes for different paths, and based on the matched route, it renders different components inside a common Layout component.  
+
+### What role does npm play in web development?
+Package management, dependency management, installation of packages, command-line tools, and project automation.
+
+### What does package.json do in a npm project?
+Declare the project's dependencies, includes version information for the project itself, define custom scripts for certain tasks, specify the 'main' entry point, author / license info and metadata, other config info.
+
+### What does the fetch function do?
+The fetch function in JavaScript is used to make HTTP requests, typically to retrieve data from a server.  
+The basic usage of fetch takes a URL and returns a promise. The promise then function takes a callback function that is asynchronously called when the requested URL content is obtained. If the returned content is of type application/json you can use the json function on the response object to convert it to a JavaScript object.  
+
+### What does node.js do?
+Node.js is a JavaScript runtime built on the V8 JavaScript engine. It allows developers to run JavaScript code on the server side, outside of a web browser. 
+
+### What does Vite do?
+Vite is a full web framework toolchain that allows us to use JSX, minification, polyfills, and bundling for our Simon and startup applications.  
+Vite bundles your code quickly, has great debugging support, and allows you to easily support JSX, TypeScript, and different CSS flavors. 
